@@ -5,53 +5,15 @@ require 'forwardable'
 require 'socket'
 require 'thread'
 
+require 'osc/simple_client'
+require 'osc/osc_argument'
+require 'osc/types'
+
 module OSC
 
-  class OSCArgument
 
-    def initialize(val) @val = val end
 
-    attr_accessor :val
 
-    def to_i() @val.to_i end
-    def to_f() @val.to_f end
-    def to_s() @val.to_s end
-
-    def padding(s)
-      s + ("\000" * ((4 - (s.size % 4)) % 4))
-    end
-
-    private :padding
-
-  end
-
-  class OSCInt32 < OSCArgument
-
-    def tag() 'i' end
-    def encode() [@val].pack('N') end
-
-  end
-
-  class OSCFloat32 < OSCArgument
-
-    def tag() 'f' end
-    def encode() [@val].pack('g') end # fake
-
-  end
-
-  class OSCString < OSCArgument
-
-    def tag() 's' end
-    def encode() padding(@val.sub(/\000.*\z/, '') + "\000") end
-
-  end
-
-  class OSCBlob < OSCArgument
-
-    def tag() 'b' end
-    def encode() padding([@val.size].pack('N') + @val) end
-
-  end
 
   class Packet
 
@@ -357,19 +319,6 @@ module OSC
       rescue
 	Thread.main.raise $!
       end
-    end
-
-  end
-
-  class SimpleClient
-
-    def initialize(host, port)
-      @so = UDPSocket.new
-      @so.connect(host, port)
-    end
-
-    def send(mesg)
-      @so.send(mesg.encode, 0)
     end
 
   end
