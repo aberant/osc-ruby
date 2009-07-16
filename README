@@ -5,19 +5,10 @@ OSC is an "OpenSound Control" module for an object‐oriented
 scripting language Ruby.
 
 
-Install
-‐‐‐‐‐‐‐
-
-Use the script "install.rb".
-
-  $ ruby install.rb config
-  $ ruby install.rb setup
- ($ su)
-  # ruby install.rb install
-
-For more information, type "ruby install.rb ‐‐help".
 
 
+
+Originally created by...
 Tadayoshi Funaba
 mailto:tadf@funaba.org
 http://www.funaba.org/en/
