@@ -1,0 +1,23 @@
+OSC モジュール
+==============
+
+OSC はオブジェクト指向スクリプト言語 Ruby のための、「オープンサウンド・
+コントロール」モジュールです。
+
+
+インストール
+------------
+
+スクリプト "install.rb" をつかいます。
+
+  $ ruby install.rb config
+  $ ruby install.rb setup
+ ($ su)
+  # ruby install.rb install
+
+くわしくは、"ruby install.rb --help" としてください。
+
+
+舟迫忠佳 (ふなばただよし)
+mailto:tadf@funaba.org
+http://www.funaba.org/
