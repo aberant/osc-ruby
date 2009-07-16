@@ -1,23 +1,23 @@
-OSC ¥â¥¸¥å¡¼¥ë
+An "OSC" module
 ==============
 
-OSC ¤Ï¥ª¥Ö¥¸¥§¥¯¥È»Ø¸ş¥¹¥¯¥ê¥×¥È¸À¸ì Ruby ¤Î¤¿¤á¤Î¡¢¡Ö¥ª¡¼¥×¥ó¥µ¥¦¥ó¥É¡¦
-¥³¥ó¥È¥í¡¼¥ë¡×¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
+OSC is an "OpenSound Control" module for an objectâ€oriented
+scripting language Ruby.
 
 
-¥¤¥ó¥¹¥È¡¼¥ë
-------------
+Install
+â€â€â€â€â€â€â€
 
-¥¹¥¯¥ê¥×¥È "install.rb" ¤ò¤Ä¤«¤¤¤Ş¤¹¡£
+Use the script "install.rb".
 
   $ ruby install.rb config
   $ ruby install.rb setup
  ($ su)
   # ruby install.rb install
 
-¤¯¤ï¤·¤¯¤Ï¡¢"ruby install.rb --help" ¤È¤·¤Æ¤¯¤À¤µ¤¤¡£
+For more information, type "ruby install.rb â€â€help".
 
 
-½®Ç÷Ãé²Â (¤Õ¤Ê¤Ğ¤¿¤À¤è¤·)
+Tadayoshi Funaba
 mailto:tadf@funaba.org
-http://www.funaba.org/
+http://www.funaba.org/en/
