@@ -5,20 +5,15 @@ require 'forwardable'
 require 'socket'
 require 'thread'
 
-require 'osc/simple_client'
-require 'osc/osc_argument'
-require 'osc/types'
+require 'osc-ruby/simple_client'
+require 'osc-ruby/osc_types'
 
 module OSC
-
-
-
-
 
   class Packet
 
     class PO
-
+ 
       def initialize(str) @str, @index = str, 0 end
       def rem() @str.length - @index end
       def eof? () rem <= 0 end

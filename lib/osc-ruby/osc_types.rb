@@ -1,3 +1,5 @@
+require 'osc-ruby/osc_argument'
+
  module OSC
   class OSCInt32 < OSCArgument
 
