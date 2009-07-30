@@ -2,50 +2,51 @@ module OSC
   class SimpleServer
 
     def initialize(port)
-      @so = UDPSocket.new
-      @so.bind('', port)
+      @socket = UDPSocket.new
+      @socket.bind('', port)
       @cb = []
-      @qu = Queue.new
+      @queue = Queue.new
     end
-
-    def add_method(pat, obj=nil, &proc)
-      case pat
-        when NIL; re = pat
-        when Regexp; re = pat
-        when String
-	        pat = pat.dup
-	        pat.gsub!(/[.^(|)]/, '\\1')
-	        pat.gsub!(/\?/, '[^/]')
-	        pat.gsub!(/\*/, '[^/]*')
-	        pat.gsub!(/\[!/, '[^')
-	        pat.gsub!(/\{/, '(')
-	        pat.gsub!(/,/, '|')
-	        pat.gsub!(/\}/, ')')
-	        pat.gsub!(/\A/, '\A')
-	        pat.gsub!(/\z/, '\z')
-	        re = Regexp.new(pat)
-        else
-	        raise ArgumentError, 'invalid pattern'
+    
+    def run
+      Thread.fork do
+	      begin
+	        dispatcher
+	      rescue
+	        Thread.main.raise $!
+	      end
       end
       
-      unless  ( obj && !proc) ||
-	            (!obj &&  proc)
-	      raise ArgumentError, 'wrong number of arguments'
+      begin
+	      detector
+      rescue
+	      Thread.main.raise $!
       end
-      @cb << [re, (obj || proc)]
+    end
+    
+    def stop
+      @socket.close
     end
 
+    def add_method(address_pattern, &proc)
+      matcher = AddressPattern.new( address_pattern )
+      
+      @cb << [matcher, proc]
+    end
+
+private
+
     def sendmesg(mesg)
-      @cb.each do |re, obj|
-	      if re.nil? || re =~ mesg.address
-	        obj.send(if Proc === obj then :call else :accept end, mesg)
+      @cb.each do |matcher, obj|
+	      if matcher.match?( mesg.address )
+	        obj.call( mesg )
 	      end
       end
     end
 
     def dispatcher
       loop do
-	      time, mesg = @qu.pop
+	      time, mesg = @queue.pop
 	      now = Time.now.to_f + 2208988800
 	      diff = if time.nil?
 	       then 0 else time - now end
@@ -64,30 +65,13 @@ module OSC
 
     def detector
       loop do
-	      pa = @so.recv(16384)
+	      pa = @socket.recv(16384)
 	      begin
-	        Packet.decode(pa).each{|x| @qu.push(x)}
+	        Packet.decode(pa).each{|x| @queue.push(x)}
 	      rescue EOFError
 	      end
       end
     end
 
-    private :sendmesg, :dispatcher, :detector
-
-    def run
-      Thread.fork do
-	      begin
-	        dispatcher
-	      rescue
-	        Thread.main.raise $!
-	      end
-      end
-      
-      begin
-	      detector
-      rescue
-	      Thread.main.raise $!
-      end
-    end
   end
 end

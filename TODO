@@ -1,0 +1,5 @@
+ruby 1.9 compatible
+one class per file
+test SimpleClient
+test simple server
+  

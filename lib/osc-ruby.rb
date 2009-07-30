@@ -5,10 +5,14 @@ require 'forwardable'
 require 'socket'
 require 'thread'
 
+$:.unshift( File.dirname( __FILE__ ) )
+
 require 'osc-ruby/osc_types'
 require 'osc-ruby/packet'
 require 'osc-ruby/message'
 require 'osc-ruby/bundle'
+require 'osc-ruby/address_pattern'
+
 
 require 'osc-ruby/simple_server'
 require 'osc-ruby/simple_client'
