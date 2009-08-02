@@ -17,6 +17,10 @@ module OSC
     
     def initialize( string )
       @packet = NetworkPacket.new( string )
+      
+      @types = { "i" => lambda{  OSCInt32.new( get_int32 ) }, 
+                 "f" => lambda{  OSCFloat32.new( get_float32 ) }
+                }
     end
     
     def get_string
@@ -50,9 +54,8 @@ module OSC
         args = []
         
         tags.scan(/./) do | tag |
-          args << OSCInt32.new( get_int32 )
+          args << @types[tag].call
         end
-        return nil if args.empty?
         args
       end
     end
@@ -62,6 +65,12 @@ module OSC
       i -= 2**32 if i > (2**31-1)
       @packet.skip_padding
       i
+    end
+    
+    def get_float32
+      f = @packet.getn(4).unpack('g')[0]
+      @packet.skip_padding
+      f
     end
   end
 end
