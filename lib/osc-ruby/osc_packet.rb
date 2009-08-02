@@ -1,7 +1,7 @@
 require File.join( File.dirname( __FILE__ ), 'network_packet')
 
 module OSC
-  class OSCStream
+  class OSCPacket
     def initialize( string )
       @stream = NetworkPacket.new( string )
     end

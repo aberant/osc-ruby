@@ -1,10 +1,10 @@
 require File.join( File.dirname(__FILE__) , '..', 'spec_helper' )
 
 
-describe OSC::OSCStream do
+describe OSC::OSCPacket do
   before :each do
     string = "#bundle\000\316\034\315T\000\003\030\370\000\000\000$/tuio/2Dobj\000,ss\000source\000\000simulator\000\000\000\000\000\000\030/tuio/2Dobj\000,s\000\000alive\000\000\000\000\000\000\034/tuio/2Dobj\000,si\000fseq\000\000\000\000\377\377\377\377"
-    @bundle = OSC::OSCStream.new( string ) 
+    @bundle = OSC::OSCPacket.new( string ) 
   end
   
   it "should pull a string from the stream" do
