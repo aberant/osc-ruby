@@ -8,6 +8,6 @@ I've used the OSC gem originally created by Tadayoshi Funaba and wanted to updat
 
 
 
-Originally created by...
-Tadayoshi Funaba
-http://www.funaba.org/en/
+=== Originally created by...
+  Tadayoshi Funaba
+  http://www.funaba.org/en/
