@@ -2,11 +2,25 @@ module OSC
   class Packet
 
     class PO
-      def initialize(str) @str, @index = str, 0 end
-      def rem() @str.length - @index end
-      def eof? () rem <= 0 end
-      def skip(n) @index += n end
-      def skip_padding() skip((4 - (@index % 4)) % 4) end
+      def initialize(str) 
+        @str, @index = str, 0 
+      end
+      
+      def rem() 
+        @str.length - @index 
+      end
+      
+      def eof? () 
+        rem <= 0 
+      end
+      
+      def skip(n) 
+        @index += n 
+      end
+      
+      def skip_padding() 
+        skip((4 - (@index % 4)) % 4) 
+      end
 
       def getn(n)
       	raise EOFError if rem < n

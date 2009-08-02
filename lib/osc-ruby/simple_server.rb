@@ -66,6 +66,7 @@ private
     def detector
       loop do
 	      pa = @socket.recv(16384)
+	      raise pa.inspect
 	      begin
 	        Packet.decode(pa).each{|x| @queue.push(x)}
 	      rescue EOFError

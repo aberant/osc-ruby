@@ -6,8 +6,8 @@ describe OSC::SimpleServer do
     
   end
   it "should not blow up" do
+    pending
     ss = OSC::SimpleServer.new( 3333 )
-    obj = Object.new
     
     ss.add_method( "/hi")    
     

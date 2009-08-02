@@ -29,7 +29,7 @@ private
           # @pattern.gsub!(/\A/, '\A')
           # @pattern.gsub!(/\z/, '\z')
 
-          @re = Regexp.new(@pattern.dup)
+          @re = Regexp.new(@pattern)
         else
           raise ArgumentError, 'invalid pattern'
       end
