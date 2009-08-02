@@ -18,8 +18,9 @@ module OSC
     def initialize( string )
       @packet = NetworkPacket.new( string )
       
-      @types = { "i" => lambda{  OSCInt32.new( get_int32 ) }, 
-                 "f" => lambda{  OSCFloat32.new( get_float32 ) }
+      @types = { "i" => lambda{  OSCInt32.new(   get_int32 ) }, 
+                 "f" => lambda{  OSCFloat32.new( get_float32 ) },
+                 "s" => lambda{  OSCString.new(  get_string ) }
                 }
     end
     
