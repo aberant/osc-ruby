@@ -6,8 +6,10 @@ http://opensoundcontrol.org/
 
 I've used the OSC gem originally created by Tadayoshi Funaba and wanted to update it for ruby 1.9 compatibility.  I'm also writing rspec tests for this library to allow others to more easily understand/update the code.
 
+== TODO
 
+This is still a work in progress.  Support for blobs is coming up next.   
 
-=== Originally created by...
-  Tadayoshi Funaba
-  http://www.funaba.org/en/
+Originally created by...
+Tadayoshi Funaba
+http://www.funaba.org/en/
