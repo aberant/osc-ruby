@@ -3,7 +3,6 @@ require File.join( File.dirname(__FILE__) , '..', 'spec_helper' )
 
 describe OSC::OSCPacket do
   before :each do
-    @complex_packet = "#bundle\000\316\034\315T\000\003\030\370\000\000\000$/tuio/2Dobj\000,ss\000source\000\000simulator\000\000\000\000\000\000\030/tuio/2Dobj\000,s\000\000alive\000\000\000\000\000\000\034/tuio/2Dobj\000,si\000fseq\000\000\000\000\377\377\377\377"
     @simple_packet = "/hi\000,\000\000\000"
     @simple_with_integer_arg = "/hi\000,i\000\000\000\000\000*"
     @simple_with_two_integer_args = "/hi\000,ii\000\000\000\000*\000\000\000!"
@@ -12,8 +11,6 @@ describe OSC::OSCPacket do
     @simple_with_string_arg = "/hi\000,s\000\000greetings\000\000\000"
     @simple_with_two_string_args = "/hi\000,ss\000greetings\000\000\000how are you?\000\000\000\000"
     @simple_with_int_float_string = "/hi\000,ifs\000\000\000\000\000\000\000*B\004\n=greetings\000\000\000"
-    
-    @bundle = OSC::OSCPacket.new( @complex_packet ) 
   end
   
   it "should decode the address of a simple message from the network data" do

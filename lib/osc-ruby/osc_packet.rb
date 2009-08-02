@@ -6,13 +6,26 @@ module OSC
       messages = []
       osc = new( string )
       
-      address = osc.get_string
-      args = osc.get_arguments 
-
-      messages << Message.new(address, nil, *args )
-      
+      if osc.bundle?
+        bundle = osc.get_string
+        time = osc.get_timestamp
+        
+        osc.get_bundle_messages.each do | message |
+          messages << decode_simple_message( OSCPacket.new( message ) )
+        end
+        
+      else
+        messages << decode_simple_message( osc )
+      end
       
       return messages
+    end
+    
+    def self.decode_simple_message( osc_packet )
+      address = osc_packet.get_string
+      args = osc_packet.get_arguments 
+
+      Message.new(address, nil, *args )
     end
     
     def initialize( string )
@@ -22,6 +35,16 @@ module OSC
                  "f" => lambda{  OSCFloat32.new( get_float32 ) },
                  "s" => lambda{  OSCString.new(  get_string ) }
                 }
+    end
+    
+    def get_bundle_messages
+      bundle_messages = []
+      
+      until @packet.eof?
+        l = @packet.getn(4).unpack('N')[0]
+        bundle_messages << @packet.getn(l)
+      end
+      bundle_messages
     end
     
     def get_string
@@ -72,6 +95,10 @@ module OSC
       f = @packet.getn(4).unpack('g')[0]
       @packet.skip_padding
       f
+    end
+    
+    def bundle?
+      !(@packet.to_s =~ /\A\#bundle/).nil?
     end
   end
 end

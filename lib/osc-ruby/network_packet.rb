@@ -4,6 +4,10 @@ module OSC
       @str, @index = str, 0 
     end
     
+    def to_s
+      @str
+    end
+    
     def rem() 
       @str.length - @index 
     end
