@@ -10,6 +10,8 @@ I've used the OSC gem originally created by Tadayoshi Funaba and wanted to updat
 
 This is still a work in progress.  Support for blobs is coming up next.   
 
+== CREDITS
+
 Originally created by...
 Tadayoshi Funaba
 http://www.funaba.org/en/
