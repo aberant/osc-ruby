@@ -1,10 +1,10 @@
 require File.join( File.dirname(__FILE__) , '..', 'spec_helper' )
 
 
-describe OSC::PacketStream do
+describe OSC::NetworkPacket do
   before :each do
-    @empty = OSC::PacketStream.new( "" )
-    @simple = OSC::PacketStream.new( "abc" )
+    @empty = OSC::NetworkPacket.new( "" )
+    @simple = OSC::NetworkPacket.new( "abc" )
   end
   
   it "should know if it's at the end of the stream" do

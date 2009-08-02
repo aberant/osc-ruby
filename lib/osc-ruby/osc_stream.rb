@@ -1,9 +1,9 @@
-require File.join( File.dirname( __FILE__ ), 'packet_stream')
+require File.join( File.dirname( __FILE__ ), 'network_packet')
 
 module OSC
   class OSCStream
     def initialize( string )
-      @stream = PacketStream.new( string )
+      @stream = NetworkPacket.new( string )
     end
     
     def get_string

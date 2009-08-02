@@ -1,5 +1,5 @@
 module OSC
-  class PacketStream
+  class NetworkPacket
     def initialize(str) 
       @str, @index = str, 0 
     end
@@ -19,7 +19,7 @@ module OSC
     def skip_padding() 
       skip((4 - (@index % 4)) % 4) 
     end
-
+ 
     def getn(n)
     	raise EOFError if rem < n
     	s = @str[@index, n]
