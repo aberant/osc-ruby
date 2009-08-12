@@ -4,6 +4,8 @@ module OSC
     include Enumerable
 
     attr_accessor :address
+    attr_accessor :time 
+    
     undef_method :zip
 
     de = (Array.instance_methods - self.instance_methods)
@@ -11,7 +13,12 @@ module OSC
     de += %w(include? sort)
 
     def_delegators(:@args, *de)
-
+    
+    def self.new_with_time( address, time, tags=nil, *args )
+      message = new( address, tags, *args )
+      message.time = time
+      message
+    end
     
     def initialize(address, tags=nil, *args)
       @address = address

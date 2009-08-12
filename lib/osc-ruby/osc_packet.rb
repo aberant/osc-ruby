@@ -1,4 +1,5 @@
 require File.join( File.dirname( __FILE__ ), 'network_packet')
+require 'ostruct'
 
 module OSC
   class OSCPacket
@@ -11,21 +12,21 @@ module OSC
         time = osc.get_timestamp
         
         osc.get_bundle_messages.each do | message |
-          messages << decode_simple_message( OSCPacket.new( message ) )
+          messages << decode_simple_message( time, OSCPacket.new( message ) )
         end
         
       else
-        messages << decode_simple_message( osc )
+        messages << decode_simple_message( time, osc )
       end
       
       return messages
     end
     
-    def self.decode_simple_message( osc_packet )
+    def self.decode_simple_message( time, osc_packet )
       address = osc_packet.get_string
       args = osc_packet.get_arguments 
 
-      Message.new(address, nil, *args )
+      Message.new_with_time(address, time, nil, *args )
     end
     
     def initialize( string )

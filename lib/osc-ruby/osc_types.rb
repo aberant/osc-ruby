@@ -11,7 +11,7 @@ require 'osc-ruby/osc_argument'
   class OSCFloat32 < OSCArgument
 
     def tag() 'f' end
-    def encode() [@val].pack('g') end # fake
+    def encode() [@val].pack('g') end # fake - why fake?
 
   end
 
