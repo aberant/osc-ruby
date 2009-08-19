@@ -3,74 +3,93 @@ require File.join( File.dirname(__FILE__) , '..', 'spec_helper' )
 
 describe OSC::OSCPacket do
   before :each do
-    @simple_packet = "/hi\000,\000\000\000"
-    @simple_with_integer_arg = "/hi\000,i\000\000\000\000\000*"
-    @simple_with_two_integer_args = "/hi\000,ii\000\000\000\000*\000\000\000!"
-    @simple_with_float_arg = "/hi\000,f\000\000B(\n="
-    @simple_with_two_float_args = "/hi\000,ff\000B(\n=B\004\n="
-    @simple_with_string_arg = "/hi\000,s\000\000greetings\000\000\000"
-    @simple_with_two_string_args = "/hi\000,ss\000greetings\000\000\000how are you?\000\000\000\000"
-    @simple_with_int_float_string = "/hi\000,ifs\000\000\000\000\000\000\000*B\004\n=greetings\000\000\000"
+    @address = "/hi"
+    @first_int = 42
+    @second_int = 33
+    
+    @first_float = 42.01
+    @second_float = 33.01
+    
+    @first_string = "greetings"
+    @second_string = "how are you?"
+    
+    @builder = MessageBuilder.new
+    @builder.with_address( @address )
   end
   
   it "should decode the address of a simple message from the network data" do
-    messages = OSC::OSCPacket.messages_from_network( @simple_packet )
-    messages.should have( 1 ).item
-    messages.first.should eql( OSC::Message.new( "/hi" ) )
+    sent_msg = @builder.build
+    
+    msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
+    
+    msg.first.address.should == @address
   end
   
-  it "should decode the address and int arg of a simple message from the network data" do
-    messages = OSC::OSCPacket.messages_from_network( @simple_with_integer_arg )
-    messages.should have( 1 ).item
-    messages.first.should eql( OSC::Message.new( "/hi", "i", 42 ) )
+  it "should decode the int arg of a simple message from the network data" do
+    sent_msg = @builder.with_int( @first_int ).build
+    
+    msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
+    
+    msg.first.to_a.should == [@first_int]
   end
   
-  it "should decode the address and two int args" do
-    messages = OSC::OSCPacket.messages_from_network( @simple_with_two_integer_args )
-    messages.should have( 1 ).item
-    messages.first.should eql( OSC::Message.new( "/hi", "ii", 42, 33 ) )
+  it "should decode two int args" do
+    sent_msg = @builder.with_int( @first_int ).with_int( @second_int ).build
+    
+    msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
+    
+    msg.first.to_a.should == [@first_int, @second_int]
   end
   
   it "shold decode address with float arg" do
-    messages = OSC::OSCPacket.messages_from_network( @simple_with_float_arg )
-    messages.should have( 1 ).item
-    message = messages.first
+    sent_msg = @builder.with_float( @first_float ).build
     
-    message.address.should eql( "/hi" ) 
-    message.to_a.first.should be_close(42.01, 0.001)
+    msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
+    
+    msg.first.to_a[0].should be_close( @first_float, 0.001 )
   end
+  
   
   it "shold decode address with two float args" do
-    messages = OSC::OSCPacket.messages_from_network( @simple_with_two_float_args )
-    messages.should have( 1 ).item
-    message = messages.first
+    sent_msg = @builder.with_float( @first_float ).with_float( @second_float).build
     
-    message.address.should eql( "/hi" ) 
-    args = message.to_a
-    args.first.should be_close( 42.01, 0.001 )
-    args[1].should be_close( 33.01, 0.0001 )
+    msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
+    
+    args = msg.first.to_a
+    args.first.should be_close( @first_float, 0.001 )
+    args[1].should be_close( @second_float, 0.0001 )
   end
   
   it "should decode address with string arg" do
-    messages = OSC::OSCPacket.messages_from_network( @simple_with_string_arg )
+    sent_msg = @builder.with_string( @first_string ).build
+  
+    msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
     
-    messages.first.should eql( OSC::Message.new( "/hi", "ss", "greetings" ) )
+    msg.first.to_a.should == [@first_string]
   end
   
-  it "should decode address with string arg" do
-    messages = OSC::OSCPacket.messages_from_network( @simple_with_two_string_args )
+  it "should decode address with multiple string args" do
+    sent_msg = @builder.with_string( @first_string ).with_string( @second_string).build
+    msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
     
-    messages.first.should eql( OSC::Message.new( "/hi", "ss", "greetings", "how are you?" ) )
+    args = msg.first.to_a
+    args[0].should == @first_string
+    args[1].should == @second_string
   end
+  
   
   it "should decode messages with three different types of args" do
-    messages = OSC::OSCPacket.messages_from_network( @simple_with_int_float_string )
-    args = messages.first.to_a
+    sent_msg = @builder.with_int( @first_int ).
+                        with_float( @second_float ).
+                        with_string( @first_string ).
+                        build
     
-    args.should have(3).items
+    msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
     
-    args[0].should eql( 42 )
-    args[1].should be_close( 33.01, 0.0001 )
-    args[2].should eql( "greetings" )
+    args = msg.first.to_a
+    
+    args[0].should eql( @first_int )
+    args[1].should be_close( @second_float, 0.0001 )
+    args[2].should eql( @first_string )
   end
 end
