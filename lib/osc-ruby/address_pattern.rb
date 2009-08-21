@@ -17,8 +17,7 @@ private
         when Regexp; @re = @pattern
         when String
           
-          # commented out ones mean they were in the original lib
-          # but i'm unsure what they do
+          # i'm unsure what this does
           # @pattern.gsub!(/[.^(|)]/, '\\1')
           
           # handles osc single char wildcard matching
@@ -30,12 +29,14 @@ private
           # handles [!] matching
           @pattern.gsub!(/\[!/, '[^')
             
-            
+          # handles {} matching
           @pattern.gsub!(/\{/, '(')
           @pattern.gsub!(/,/, '|')
           @pattern.gsub!(/\}/, ')')
           
-          # @pattern.gsub!(/\A/, '\A')
+          
+          # keeps from matching before the begining of the pattern
+          @pattern.gsub!(/\A/, '\A')
           
           # keeps from matching beyond the end, 
           # eg. pattern /hi does not match /hidden

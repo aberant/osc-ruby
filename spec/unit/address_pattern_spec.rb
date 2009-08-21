@@ -11,7 +11,7 @@ describe OSC::AddressPattern do
   it "should match based on a regex" do
     ap = OSC::AddressPattern.new( /hi/ )
     
-    ap.match?( '  /hi' ).should be_true
+    ap.match?( '/hi' ).should be_true
     ap.match?( '/hidden' ).should be_true
     
     ap.match?( '/bye' ).should be_false
@@ -22,6 +22,7 @@ describe OSC::AddressPattern do
     
     ap.match?('/hi').should be_true
     
+    ap.match?('   /hi').should be_false
     ap.match?('/ahi').should be_false
     ap.match?( '/hidden' ).should be_false
     ap.match?( '/bye' ).should be_false
