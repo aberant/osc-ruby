@@ -9,19 +9,9 @@ module OSC
     end
     
     def run
-      Thread.fork do
-	      begin
-	        dispatcher
-	      rescue
-	        Thread.main.raise $!
-	      end
-      end
+      start_dispatcher
       
-      begin
-	      detector
-      rescue
-	      Thread.main.raise $!
-      end
+      start_detector
     end
     
     def stop
@@ -36,6 +26,24 @@ module OSC
 
 private
 
+    def start_detector
+      begin
+	      detector
+      rescue
+	      Thread.main.raise $!
+      end
+    end
+  
+    def start_dispatcher
+      Thread.fork do
+	      begin
+	        dispatcher
+	      rescue
+	        Thread.main.raise $!
+	      end
+      end
+    end
+
     def sendmesg(mesg)
       @cb.each do |matcher, obj|
 	      if matcher.match?( mesg.address )
@@ -46,7 +54,9 @@ private
 
     def dispatcher
       loop do
-	      time, mesg = @queue.pop
+	      mesg = @queue.pop
+	      time = mesg.time
+	      
 	      now = Time.now.to_f + 2208988800
 	      diff = if time.nil?
 	       then 0 else time - now end
@@ -66,9 +76,8 @@ private
     def detector
       loop do
 	      pa = @socket.recv(16384)
-	      raise pa.inspect
 	      begin
-	        Packet.decode(pa).each{|x| @queue.push(x)}
+	        OSCPacket.messages_from_network(pa).each{|x| @queue.push(x)}
 	      rescue EOFError
 	      end
       end

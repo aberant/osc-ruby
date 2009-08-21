@@ -7,7 +7,6 @@ module OSC
     end
     
     def match?( address )
-      # if the regex is empty(matches anything) OR regex matches the address
       !!(@re.nil? || @re.match( address ))
     end
     
@@ -18,16 +17,29 @@ private
         when Regexp; @re = @pattern
         when String
           
-          # maybe this is simple regex escaping?
+          # commented out ones mean they were in the original lib
+          # but i'm unsure what they do
           # @pattern.gsub!(/[.^(|)]/, '\\1')
-          # @pattern.gsub!(/\?/, '[^/]')
-          # @pattern.gsub!(/\*/, '[^/]*')
-          # @pattern.gsub!(/\[!/, '[^')
-          # @pattern.gsub!(/\{/, '(')
-          # @pattern.gsub!(/,/, '|')
-          # @pattern.gsub!(/\}/, ')')
+          
+          # handles osc single char wildcard matching
+          @pattern.gsub!(/\?/, '[^/]')
+          
+          # handles osc * - 0 or more matching
+          @pattern.gsub!(/\*/, '[^/]*')
+          
+          # handles [!] matching
+          @pattern.gsub!(/\[!/, '[^')
+            
+            
+          @pattern.gsub!(/\{/, '(')
+          @pattern.gsub!(/,/, '|')
+          @pattern.gsub!(/\}/, ')')
+          
           # @pattern.gsub!(/\A/, '\A')
-          # @pattern.gsub!(/\z/, '\z')
+          
+          # keeps from matching beyond the end, 
+          # eg. pattern /hi does not match /hidden
+          @pattern.gsub!(/\z/, '\z')
 
           @re = Regexp.new(@pattern)
         else
