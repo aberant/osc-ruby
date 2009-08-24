@@ -27,6 +27,11 @@ class MessageBuilder
     self
   end
   
+  def with_blob( blob )
+    with_arg( "b", blob )
+    self
+  end
+  
   def with_time( time )
     @time = time
   end

@@ -13,6 +13,9 @@ describe OSC::OSCPacket do
     @first_string = "greetings"
     @second_string = "how are you?"
     
+    @first_blob = "this is a fake blob"
+    @second_blob = "tis another fake blob"
+    
     @builder = MessageBuilder.new
     @builder.with_address( @address )
   end
@@ -91,5 +94,15 @@ describe OSC::OSCPacket do
     args[0].should eql( @first_int )
     args[1].should be_close( @second_float, 0.0001 )
     args[2].should eql( @first_string )
+  end
+  
+  it "should decode messages with blobs" do
+    sent_msg = @builder.with_blob( @first_blob ).build
+    
+    
+    msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
+    
+    args = msg.first.to_a
+    args.first.should eql( @first_blob )
   end
 end

@@ -11,7 +11,8 @@ module OSC
     de = (Array.instance_methods - self.instance_methods)
     de -= %w(assoc flatten flatten! pack rassoc transpose)
     de += %w(include? sort)
-
+    # puts de.inspect
+    # 
     def_delegators(:@args, *de)
     
     def self.new_with_time( address, time, tags=nil, *args )
@@ -23,6 +24,8 @@ module OSC
     def initialize(address, tags=nil, *args)
       @address = address
       @args = []
+      
+      
       args.each_with_index do |arg, i|
 	      if tags && tags[i]
 	        case tags[i]
@@ -45,11 +48,11 @@ module OSC
     end
 
 
-    def tags() ',' + @args.collect{|x| x.tag}.join end
+    def tags() @args.collect{|x| x.tag}.join end
 
     def encode
-      s = OSCString.new(@address).encode
-      s << OSCString.new(tags).encode
+      s = OSCString.new( @address ).encode
+      s << OSCString.new( ',' + tags ).encode
       s << @args.collect{|x| x.encode}.join
     end
 

@@ -34,7 +34,8 @@ module OSC
       
       @types = { "i" => lambda{  OSCInt32.new(   get_int32 ) }, 
                  "f" => lambda{  OSCFloat32.new( get_float32 ) },
-                 "s" => lambda{  OSCString.new(  get_string ) }
+                 "s" => lambda{  OSCString.new(  get_string ) },
+                 "b" => lambda{  OSCBlob.new(    get_blob )}
                 }
     end
     
@@ -96,6 +97,13 @@ module OSC
       f = @packet.getn(4).unpack('g')[0]
       @packet.skip_padding
       f
+    end
+    
+    def get_blob
+      l = @packet.getn(4).unpack('N')[0]
+      b = @packet.getn(l)
+      @packet.skip_padding
+      b
     end
     
     def bundle?

@@ -63,7 +63,6 @@ private
     def detector
       loop do
 	      pa = @socket.recv(16384)
-	      puts pa.inspect
 	      begin
 	        OSCPacket.messages_from_network(pa).each{|x| @queue.push(x)}
 	      rescue EOFError
