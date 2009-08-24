@@ -4,18 +4,7 @@ describe OSC::MessageQueue do
 
   before :each do
     @queue = OSC::MessageQueue.new
-  end
-    
-  describe "sanity check" do
-    it "should be able to push into the queue" do
-      @queue.should respond_to( :push )
-    end
-  
-    it "should be able to pop from the queue" do
-      @queue.push( "hi" )
-      @queue.pop.should == "hi"
-    end
-  end  
+  end 
   
   describe "queueing messages" do
     before :each do
@@ -36,6 +25,7 @@ describe OSC::MessageQueue do
     end
     
     it "should pop in the right order" do
+      pending "until i can get Message to send bundles"
       @queue.push( @oldest )
       @queue.push( @newest )
       @queue.push( @middle )

@@ -12,6 +12,7 @@ $:.unshift( File.dirname( __FILE__ ) )
 # core extensions
 require 'osc-ruby/core_ext/object'
 require 'osc-ruby/core_ext/numeric'
+require 'osc-ruby/core_ext/time'
 
 
 # jus the basics

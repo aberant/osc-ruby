@@ -14,13 +14,7 @@ module OSC
         @empty_cond.signal
       end
     end
-    
-    def pop
-      @monitor.synchronize do
-        @empty_cond.wait_while { @queue.empty? }
-        @queue.pop
-      end
-    end
+
     
     def pop_event
       @monitor.synchronize do
@@ -31,11 +25,14 @@ module OSC
           (b.time || Time.now) <=> ( a.time || Time.now )
         end
         
-        # put in some time checking
-      
-        @queue.pop
+        message = @queue.pop
+        	      
+	      @empty_cond.wait_while do
+  	      (( message.time || 0 ) - Time.now.to_ntp ) > 0
+        end
+        
+        message
       end
-      
     end
   end
 end

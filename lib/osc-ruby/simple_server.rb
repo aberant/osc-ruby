@@ -5,7 +5,7 @@ module OSC
       @socket = UDPSocket.new
       @socket.bind('', port)
       @cb = []
-      @queue = Queue.new
+      @queue = MessageQueue.new
     end
     
     def run
@@ -54,28 +54,16 @@ private
 
     def dispatcher
       loop do
-	      mesg = @queue.pop
-	      time = mesg.time
-	      
-	      now = Time.now.to_f + 2208988800
-	      diff = if time.nil?
-	       then 0 else time - now end
-	       
-	      if diff <= 0
-	        sendmesg(mesg)
-	      else
-	        Thread.fork do
-	          sleep(diff)
-	          sendmesg(mesg)
-	          Thread.exit
-	        end
-	      end
+	      mesg = @queue.pop_event
+
+	      sendmesg(mesg)
       end
     end
 
     def detector
       loop do
 	      pa = @socket.recv(16384)
+	      puts pa.inspect
 	      begin
 	        OSCPacket.messages_from_network(pa).each{|x| @queue.push(x)}
 	      rescue EOFError
