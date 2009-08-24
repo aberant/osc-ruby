@@ -4,11 +4,18 @@
 require 'forwardable'
 require 'socket'
 require 'thread'
+require 'monitor'
+
 
 $:.unshift( File.dirname( __FILE__ ) )
 
+# core extensions
+require 'osc-ruby/core_ext/object'
+require 'osc-ruby/core_ext/numeric'
+
 
 # jus the basics
+require 'osc-ruby/message_queue'
 require 'osc-ruby/osc_types'
 require 'osc-ruby/packet'
 require 'osc-ruby/osc_packet'

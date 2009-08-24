@@ -4,6 +4,7 @@ class MessageBuilder
     @address = ""
     @tags = []
     @values = []
+    @time = nil
   end
   
   def with_address( addr )
@@ -26,9 +27,14 @@ class MessageBuilder
     self
   end
   
+  def with_time( time )
+    @time = time
+  end
   
   def build
-    OSC::Message.new( @address , @tags.join, *@values)
+    message = OSC::Message.new( @address , @tags.join, *@values)
+    message.time = @time
+    message
   end
   
 private
