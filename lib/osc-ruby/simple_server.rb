@@ -55,7 +55,6 @@ private
     def dispatcher
       loop do
 	      mesg = @queue.pop_event
-
 	      sendmesg(mesg)
       end
     end
