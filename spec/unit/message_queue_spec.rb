@@ -25,7 +25,7 @@ describe OSC::MessageQueue do
     end
     
     it "should pop in the right order" do
-      pending "until i can get Message to send bundles"
+      pending "until i figure out the impl of the queue i want"
       @queue.push( @oldest )
       @queue.push( @newest )
       @queue.push( @middle )

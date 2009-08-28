@@ -7,11 +7,11 @@ module OSC
     
     undef_method :zip
     
-    de = (Array.instance_methods - self.instance_methods)
-    de -= %w(assoc flatten flatten! pack rassoc transpose)
-    de += %w(include? sort)
+    # de = (Array.instance_methods - self.instance_methods)
+    # de -= %w(assoc flatten flatten! pack rassoc transpose)
+    # de += %w(include? sort)
 
-    def_delegators(:@args, *de)
+    # def_delegators(:@args, *de)
 
     
     def initialize(timetag=nil, *args)

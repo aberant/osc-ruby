@@ -12,6 +12,13 @@ require File.join( File.dirname(__FILE__) , '..', 'spec_helper' )
 
 
 describe OSC::Message do
+  before :each do
+    @builder = MessageBuilder.new
+    @builder.with_int( 42 ).
+             with_int( 33 )
+             
+    @message = @builder.build
+  end
   
   it "should have no arguments if you define none" do
     m = OSC::Message.new( "/hi" )
@@ -23,8 +30,5 @@ describe OSC::Message do
     m.to_a.should == [42]
     m.tags.should == "i"
   end
-  
-  
-  
   
 end
