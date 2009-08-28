@@ -1,11 +1,11 @@
 module OSC
-  class SimpleServer
+  class  Server
 
     def initialize(port)
       @socket = UDPSocket.new
       @socket.bind('', port)
       @cb = []
-      @queue = MessageQueue.new
+      @queue = Queue.new
     end
     
     def run
@@ -54,8 +54,9 @@ private
 
     def dispatcher
       loop do
-	      mesg = @queue.pop_event
-	      sendmesg(mesg)
+	      mesg = @queue.pop
+	      
+        dispatch_message( mesg )
       end
     end
 
@@ -66,6 +67,20 @@ private
 	        OSCPacket.messages_from_network(pa).each{|x| @queue.push(x)}
 	      rescue EOFError
 	      end
+      end
+    end
+    
+    def dispatch_message( message )
+      diff = ( message.time || 0 ) - Time.now.to_ntp
+      
+      if diff <= 0
+        sendmesg( message)
+      else # spawn a thread to wait until it's time
+        Thread.fork do
+    	    sleep(diff)
+    	    sendmesg(mesg)
+    	    Thread.exit
+    	  end
       end
     end
 

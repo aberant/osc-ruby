@@ -16,7 +16,6 @@ require 'osc-ruby/core_ext/time'
 
 
 # jus the basics
-require 'osc-ruby/message_queue'
 require 'osc-ruby/osc_types'
 require 'osc-ruby/packet'
 require 'osc-ruby/osc_packet'
@@ -25,7 +24,7 @@ require 'osc-ruby/bundle'
 require 'osc-ruby/address_pattern'
 
 # now we gettin fancy
-require 'osc-ruby/simple_server'
-require 'osc-ruby/simple_client'
+require 'osc-ruby/server'
+require 'osc-ruby/client'
 
 

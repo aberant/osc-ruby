@@ -1,5 +1,5 @@
 module OSC
-  class SimpleClient
+  class Client
 
     def initialize(host, port)
       @so = UDPSocket.new
