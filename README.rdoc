@@ -4,18 +4,41 @@ http://opensoundcontrol.org/
 
 == GOAL
 
-I've used the OSC gem originally created by Tadayoshi Funaba and wanted to update it for ruby 1.9 compatibility.  I'm also writing rspec tests for this library to allow others to more easily understand/update the code.  It's getting closer to awesome every day...
-
-Compatible with tuio-ruby
+I've used the OSC gem originally created by Tadayoshi Funaba and wanted to update it for ruby 1.9 compatibility.  I'm also writing rspec tests for this library to allow others to more easily understand/update the code.  
 
 == INSTALL
 
   sudo gem install aberant-osc-ruby
 
+== EXAMPLE
+
+  require 'rubygems'
+  require 'osc-ruby'
+
+
+  @server = OSC::Server.new( 3333 )
+  @client = OSC::Client.new( 'localhost', 3333 )
+
+  @server.add_method '/greeting' do | message |
+    puts message.to_a
+  end
+
+  Thread.new do
+    @server.run
+  end
+
+  # these type tags will be gone by next release
+  @client.send( OSC::Message.new( "/greeting" , "s", "hullo!" ))
+
+  sleep( 3 )
+  
+  
 == CREDITS
 
 Originally created by...
+
 Tadayoshi Funaba
+
 http://www.funaba.org/en/
 
 thx also to Toby Tripp and Obtiva
