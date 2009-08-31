@@ -1,18 +1,8 @@
+require File.join( File.dirname( __FILE__ ), "packet" )
+
 module OSC
   class Bundle < Packet
-    extend Forwardable
-    include Enumerable
-    
     attr_accessor :timetag
-    
-    undef_method :zip
-    
-    # de = (Array.instance_methods - self.instance_methods)
-    # de -= %w(assoc flatten flatten! pack rassoc transpose)
-    # de += %w(include? sort)
-
-    # def_delegators(:@args, *de)
-
     
     def initialize(timetag=nil, *args)
       @timetag = timetag

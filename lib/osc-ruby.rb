@@ -4,7 +4,6 @@
 require 'forwardable'
 require 'socket'
 require 'thread'
-require 'monitor'
 
 
 $:.unshift( File.dirname( __FILE__ ) )

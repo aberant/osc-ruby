@@ -1,18 +1,10 @@
+require File.join( File.dirname( __FILE__ ), "packet" )
+
 module OSC
   class Message < Packet
-    extend Forwardable
-    # include Enumerable
-
     attr_accessor :address
     attr_accessor :time 
-    
-    # undef_method :zip
 
-    # de = (Array.instance_methods - self.instance_methods)
-    # de -= %w(assoc flatten flatten! pack rassoc transpose)
-    # de += %w(include? sort)
-
-    # def_delegators(:@args, *de)
     
     def self.new_with_time( address, time, tags=nil, *args )
       message = new( address, tags, *args )

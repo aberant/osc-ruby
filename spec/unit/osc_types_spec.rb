@@ -4,7 +4,6 @@ describe OSC::OSCInt32 do
   it "should not blow up" do
     OSC::OSCInt32.new 1
   end
-  
 end
 
 describe OSC::OSCFloat32 do

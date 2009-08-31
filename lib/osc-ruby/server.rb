@@ -55,16 +55,19 @@ private
     def dispatcher
       loop do
 	      mesg = @queue.pop
-	      
         dispatch_message( mesg )
       end
     end
 
     def detector
       loop do
-	      pa = @socket.recv(16384)
+	      pa, network = @socket.recvfrom(16384)
 	      begin
-	        OSCPacket.messages_from_network(pa).each{|x| @queue.push(x)}
+	        
+	        OSCPacket.messages_from_network(pa).each do |x| 
+	          @queue.push(x)
+          end
+          
 	      rescue EOFError
 	      end
       end
