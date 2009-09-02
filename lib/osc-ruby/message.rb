@@ -12,29 +12,17 @@ module OSC
       message
     end
     
-    def initialize(address, tags=nil, *args)
+    def initialize(address, *args)
       @address = address
       @args = []
       
-      
       args.each_with_index do |arg, i|
-	      if tags && tags[i]
-	        case tags[i]
-	          when ?i; @args << OSCInt32.new(arg)
-	          when ?f; @args << OSCFloat32.new(arg)
-	          when ?s; @args << OSCString.new(arg)
-	          when ?b; @args << OSCBlob.new(arg)
-	          when ?*; @args << arg
-	          else; raise ArgumentError, 'unknown type'
-	        end
-	      else
-	        case arg
-	          when Integer;     @args << OSCInt32.new(arg)
-	          when Float;       @args << OSCFloat32.new(arg)
-	          when String;      @args << OSCString.new(arg)
-	          when OSCArgument; @args << arg
-	        end
-	      end
+        case arg
+          when Integer;     @args << OSCInt32.new(arg)
+          when Float;       @args << OSCFloat32.new(arg)
+          when String;      @args << OSCString.new(arg)
+          when OSCArgument; @args << arg
+        end
       end
     end
 

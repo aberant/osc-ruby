@@ -26,7 +26,7 @@ describe OSC::Message do
   end
   
   it "should have accept int arguments" do
-    m = OSC::Message.new( "/hi", "i", 42 )
+    m = OSC::Message.new( "/hi", 42 )
     m.to_a.should == [42]
     m.tags.should == "i"
   end

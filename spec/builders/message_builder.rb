@@ -37,7 +37,7 @@ class MessageBuilder
   end
   
   def build
-    message = OSC::Message.new( @address , @tags.join, *@values)
+    message = OSC::Message.new( @address , *@values)
     message.time = @time
     message
   end
