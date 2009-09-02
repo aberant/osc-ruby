@@ -1,6 +1,6 @@
 module OSC
   class NetworkPacket
-    def initialize(str) 
+    def initialize(str)       
       @str, @index = str, 0 
     end
     

@@ -3,6 +3,7 @@ require 'ostruct'
 
 module OSC
   class OSCPacket
+        
     def self.messages_from_network( string )
       messages = []
       osc = new( string )
@@ -51,10 +52,9 @@ module OSC
     
     def get_string
       result = ''
-      until (c = @packet.getc) == 0
+      until (c = @packet.getc) == string_delemeter
 	      result << c
       end
-      
       @packet.skip_padding
       result
     end
@@ -108,6 +108,11 @@ module OSC
     
     def bundle?
       !(@packet.to_s =~ /\A\#bundle/).nil?
+    end
+    
+    def string_delemeter
+      # ruby 1.9 has multicharacter support
+      RUBY_VERSION.include?( '1.9' ) ? "\x00" : 0
     end
   end
 end
