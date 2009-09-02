@@ -17,6 +17,9 @@ begin
     gem.email = "qzzzq1@gmail.com"
     gem.homepage = "http://github.com/aberant/osc-ruby"
     gem.authors = ["aberant"]
+    gem.files = FileList['Rakefile', 'examples/**/*', 'lib/**/*'].to_a
+    gem.test_files = FileList['spec/**/*.rb']
+    
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
