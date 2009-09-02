@@ -2,13 +2,13 @@
 
 http://opensoundcontrol.org/
 
-== DESCRIPTION
+== Description
 
-I've used the OSC gem originally created by Tadayoshi Funaba and wanted to update it for ruby 1.9 compatibility.  I'm also writing rspec tests for this library to allow others to more easily understand/update the code.  
+This OSC gem originally created by Tadayoshi Funaba has been updated for ruby 1.9 compatibility.  I've made a point to make this code as expressive as possible and provide a test suite for confident hacking.  It also should be flexible enough to support most crazy ideas.
 
 Compatible with ruby 1.8, 1.9, and jruby
 
-== INSTALL
+== Install
 
   sudo gem install aberant-osc-ruby
   
@@ -16,7 +16,7 @@ for the EMServer, you will need EventMachine
 
   sudo gem install eventmachine
 
-== EVENT MACHINE EXAMPLE
+== Event Machine example
   
   # compatible with ruby 1.8, 1.9, and jruby
   require 'rubygems'
@@ -38,7 +38,7 @@ for the EMServer, you will need EventMachine
 
   sleep( 3 )
   
-== CLASSIC EXAMPLE
+== Classic example
 
   # compatible with ruby 1.8
   require 'rubygems'
@@ -61,7 +61,7 @@ for the EMServer, you will need EventMachine
   sleep( 3 )
   
   
-== CREDITS
+== Credits
 
 Originally created by...
 
