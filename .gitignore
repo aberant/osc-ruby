@@ -3,3 +3,6 @@ Manifest
 pkg/*
 doc/*
 coverage/*
+html/*
+rdoc/*
+

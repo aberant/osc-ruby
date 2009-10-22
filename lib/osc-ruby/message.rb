@@ -37,7 +37,7 @@ module OSC
 
     def to_a() @args.collect{|x| x.val} end
       
-    def eql?( other )
+    def ==( other )
       @address == other.address &&
       to_a == other.to_a
     end

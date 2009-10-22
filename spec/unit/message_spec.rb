@@ -12,23 +12,47 @@ require File.join( File.dirname(__FILE__) , '..', 'spec_helper' )
 
 
 describe OSC::Message do
-  before :each do
-    @builder = MessageBuilder.new
-    @builder.with_int( 42 ).
-             with_int( 33 )
+  describe "basic traits" do
+    it "should have no arguments if you define none" do
+      m = OSC::Message.new( "/hi" )
+      m.to_a.should == []
+    end
+
+    it "should accept int arguments" do
+      m = OSC::Message.new( "/hi", 42 )
+      m.to_a.should == [42]
+      m.tags.should == "i"
+    end
+
+    it "should accept string arguments" do
+      m = OSC::Message.new( "/hi", "42" )
+      m.to_a.should == ["42"]
+      m.tags.should == "s"
+    end
+    
+    it "should accept float arguments" do
+      m = OSC::Message.new( "/hi", 42.001 )
+      m.to_a.should == [42.001]
+      m.tags.should == "f"
+    end
+  end
+  
+  describe "more interesting traits" do
+    before :each do
+      @builder = MessageBuilder.new
+      @builder.with_int( 42 ).
+               with_int( 33 )
              
-    @message = @builder.build
-  end
+      @message = @builder.build
+    end
   
-  it "should have no arguments if you define none" do
-    m = OSC::Message.new( "/hi" )
-    m.to_a.should == []
-  end
+
   
-  it "should have accept int arguments" do
-    m = OSC::Message.new( "/hi", 42 )
-    m.to_a.should == [42]
-    m.tags.should == "i"
+    it "should know equality" do
+      @message2 = @builder.build
+    
+      @message.object_id.should_not == @message2.object_id
+      @message.should == @message2
+    end
   end
-  
 end
