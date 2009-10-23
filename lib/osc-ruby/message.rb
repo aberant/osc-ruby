@@ -1,7 +1,5 @@
-require File.join( File.dirname( __FILE__ ), "packet" )
-
 module OSC
-  class Message < Packet
+  class Message
     attr_accessor :address
     attr_accessor :time 
 
