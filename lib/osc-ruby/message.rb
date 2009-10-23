@@ -12,11 +12,11 @@ module OSC
       message
     end
     
-    def initialize(address, *args)
+    def initialize( address, *args )
       @address = address
       @args = []
       
-      args.each_with_index do |arg, i|
+      args.each do |arg|
         case arg
           when Integer;     @args << OSCInt32.new(arg)
           when Float;       @args << OSCFloat32.new(arg)
