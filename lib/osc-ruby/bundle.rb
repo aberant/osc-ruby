@@ -33,7 +33,7 @@ module OSC
 	        t1, fr = t.divmod(1)
 	        t2 = (fr * (2**32)).to_i
         when Time
-	        t1, fr = (t.to_f + 2208988800).divmod(1)
+	        t1, fr = (t.to_ntp).divmod(1)
 	        t2 = (fr * (2**32)).to_i
         else
 	        raise ArgumentError, 'invalid time'
