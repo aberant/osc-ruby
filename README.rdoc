@@ -10,7 +10,7 @@ Compatible with ruby 1.8, 1.9, and jruby
 
 == Install
 
-  sudo gem install aberant-osc-ruby
+  sudo gem install osc-ruby
   
 for the EMServer, you will need EventMachine
 
