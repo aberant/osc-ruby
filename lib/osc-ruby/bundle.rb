@@ -17,12 +17,9 @@ module OSC
 	    end.join
     end
 
-
     def to_a() @args.collect{|x| x.to_a} end
 
-
-
-    private
+  private
 
     def encode_timetag(t)
       case t
