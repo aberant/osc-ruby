@@ -1,29 +1,29 @@
 module OSC
   class NetworkPacket
-    def initialize(str)       
-      @str, @index = str, 0 
+    def initialize(str)
+      @str, @index = str, 0
     end
-    
+
     def to_s
       @str
     end
-    
-    def rem() 
-      @str.length - @index 
+
+    def rem()
+      @str.length - @index
     end
-    
-    def eof? () 
-      rem <= 0 
+
+    def eof? ()
+      rem <= 0
     end
-    
-    def skip(n) 
-      @index += n 
+
+    def skip(n)
+      @index += n
     end
-    
-    def skip_padding() 
-      skip((4 - (@index % 4)) % 4) 
+
+    def skip_padding()
+      skip((4 - (@index % 4)) % 4)
     end
- 
+
     def getn(n)
     	raise EOFError if rem < n
     	s = @str[@index, n]
@@ -37,6 +37,5 @@ module OSC
     	skip(1)
     	c
     end
-    
   end
 end

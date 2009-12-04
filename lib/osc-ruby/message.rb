@@ -1,19 +1,18 @@
 module OSC
   class Message
     attr_accessor :address
-    attr_accessor :time 
+    attr_accessor :time
 
-    
     def self.new_with_time( address, time, tags=nil, *args )
       message = new( address, tags, *args )
       message.time = time
       message
     end
-    
+
     def initialize( address, *args )
       @address = address
       @args = []
-      
+
       args.each do |arg|
         case arg
           when Integer;     @args << OSCInt32.new(arg)
@@ -24,7 +23,6 @@ module OSC
       end
     end
 
-
     def tags() @args.collect{|x| x.tag}.join end
 
     def encode
@@ -34,7 +32,7 @@ module OSC
     end
 
     def to_a() @args.collect{|x| x.val} end
-      
+
     def ==( other )
       @address == other.address &&
       to_a == other.to_a

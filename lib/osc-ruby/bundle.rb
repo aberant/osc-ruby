@@ -1,7 +1,5 @@
-require File.join( File.dirname( __FILE__ ), "packet" )
-
 module OSC
-  class Bundle < Packet
+  class Bundle
     attr_accessor :timetag
 
     def initialize(timetag=nil, *args)

@@ -9,6 +9,5 @@ module OSC
     def send(mesg)
       @so.send(mesg.encode, 0)
     end
-
   end
 end
