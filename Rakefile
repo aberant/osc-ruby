@@ -21,25 +21,24 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-  
+
 
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "osc-ruby"
+    gem.description = "a ruby client for the OSC protocol"
     gem.summary = %Q{inital gem}
     gem.email = "qzzzq1@gmail.com"
     gem.homepage = "http://github.com/aberant/osc-ruby"
     gem.authors = ["aberant"]
     gem.files = FileList['Rakefile', 'examples/**/*', 'lib/**/*'].to_a
     gem.test_files = FileList['spec/**/*.rb']
-    gem.rubyforge_project = "osc-ruby"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
-  
-  Jeweler::RubyforgeTasks.new do |rubyforge|
-    rubyforge.doc_task = "rdoc"
-  end
+
+  Jeweler::GemcutterTasks.new
+
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
