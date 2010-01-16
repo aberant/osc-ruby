@@ -2,7 +2,6 @@ require 'socket'
 require 'thread'
 
 # core extensions
-require 'osc-ruby/core_ext/object'
 require 'osc-ruby/core_ext/numeric'
 require 'osc-ruby/core_ext/time'
 

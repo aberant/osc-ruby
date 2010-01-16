@@ -1,7 +1,3 @@
-require 'rubygems'
-require 'eventmachine'
-require File.join( File.dirname( __FILE__), '..', 'osc-ruby')
-
 module OSC
   Channel = EM::Channel.new
 

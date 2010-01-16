@@ -1,5 +1,10 @@
 # compatible with ruby 1.8, 1.9, and jruby
-require File.join( File.dirname( __FILE__ ), '..', 'lib', 'osc-ruby', 'em_server' )
+$:.unshift File.join( File.dirname( __FILE__ ), '..', 'lib')
+require 'osc-ruby'
+
+require 'rubygems'
+require 'eventmachine'
+require 'osc-ruby/em_server'
 
 @server = OSC::EMServer.new( 3333 )
 @client = OSC::Client.new( 'localhost', 3333 )

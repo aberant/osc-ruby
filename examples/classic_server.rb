@@ -1,6 +1,6 @@
 # compatible with ruby 1.8
-require File.join( File.dirname( __FILE__ ), '..', 'lib', 'osc-ruby' )
-
+$:.unshift File.join( File.dirname( __FILE__ ), '..', 'lib')
+require 'osc-ruby'
 
 @server = OSC::Server.new( 3333 )
 @client = OSC::Client.new( 'localhost', 3333 )
