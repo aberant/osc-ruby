@@ -1,21 +1,16 @@
-# osc.rb: Written by Tadayoshi Funaba 2005,2006
-# $Id: osc.rb,v 1.4 2006-11-10 21:54:37+09 tadf Exp $
 require 'forwardable'
 require 'socket'
 require 'thread'
-
-
-$:.unshift( File.dirname( __FILE__ ) )
 
 # core extensions
 require 'osc-ruby/core_ext/object'
 require 'osc-ruby/core_ext/numeric'
 require 'osc-ruby/core_ext/time'
 
-
 # jus the basics
 require 'osc-ruby/osc_types'
 require 'osc-ruby/osc_packet'
+
 require 'osc-ruby/message'
 require 'osc-ruby/bundle'
 require 'osc-ruby/address_pattern'
