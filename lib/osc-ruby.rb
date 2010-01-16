@@ -1,4 +1,3 @@
-require 'forwardable'
 require 'socket'
 require 'thread'
 
