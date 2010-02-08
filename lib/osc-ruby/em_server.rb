@@ -1,3 +1,5 @@
+require 'eventmachine'
+
 module OSC
   Channel = EM::Channel.new
 
