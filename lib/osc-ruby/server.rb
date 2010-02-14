@@ -1,27 +1,27 @@
 module OSC
   class  Server
 
-    def initialize(port)
+    def initialize( port )
       @socket = UDPSocket.new
-      @socket.bind('', port)
-      @cb = []
+      @socket.bind( '', port )
+      @matchers = []
       @queue = Queue.new
     end
-    
+
     def run
       start_dispatcher
-      
+
       start_detector
     end
-    
+
     def stop
       @socket.close
     end
 
-    def add_method(address_pattern, &proc)
+    def add_method( address_pattern, &proc )
       matcher = AddressPattern.new( address_pattern )
-      
-      @cb << [matcher, proc]
+
+      @matchers << [matcher, proc]
     end
 
 private
@@ -33,21 +33,13 @@ private
 	      Thread.main.raise $!
       end
     end
-  
+
     def start_dispatcher
       Thread.fork do
 	      begin
 	        dispatcher
 	      rescue
 	        Thread.main.raise $!
-	      end
-      end
-    end
-
-    def sendmesg(mesg)
-      @cb.each do |matcher, obj|
-	      if matcher.match?( mesg.address )
-	        obj.call( mesg )
 	      end
       end
     end
@@ -59,31 +51,39 @@ private
       end
     end
 
-    def detector
-      loop do
-	      pa, network = @socket.recvfrom(16384)
-	      begin
-	        
-	        OSCPacket.messages_from_network(pa).each do |x| 
-	          @queue.push(x)
-          end
-          
-	      rescue EOFError
-	      end
-      end
-    end
-    
     def dispatch_message( message )
       diff = ( message.time || 0 ) - Time.now.to_ntp
-      
+
       if diff <= 0
         sendmesg( message)
       else # spawn a thread to wait until it's time
         Thread.fork do
-    	    sleep(diff)
-    	    sendmesg(mesg)
+    	    sleep( diff )
+    	    sendmesg( mesg )
     	    Thread.exit
     	  end
+      end
+    end
+
+    def sendmesg(mesg)
+      @matchers.each do |matcher, proc|
+	      if matcher.match?( mesg.address )
+	        proc.call( mesg )
+	      end
+      end
+    end
+
+    def detector
+      loop do
+	      osc_data, network = @socket.recvfrom( 16384 )
+	      begin
+
+	        OSCPacket.messages_from_network( osc_data ).each do |message|
+	          @queue.push(message)
+          end
+
+	      rescue EOFError
+	      end
       end
     end
 
