@@ -23,23 +23,31 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+require 'rake/packagetask'
+require 'rake/gempackagetask'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "osc-ruby"
-    gem.description = "a ruby client for the OSC protocol"
-    gem.summary = %Q{inital gem}
-    gem.email = "qzzzq1@gmail.com"
-    gem.homepage = "http://github.com/aberant/osc-ruby"
-    gem.authors = ["aberant"]
-    gem.files = FileList['Rakefile', 'examples/**/*', 'lib/**/*'].to_a
-    gem.test_files = FileList['spec/**/*.rb']
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-  end
+### Task: gem
+gemspec = Gem::Specification.new do |gem|
+  gem.name = "osc-ruby"
+  gem.version   = File.read('VERSION')
 
-  Jeweler::GemcutterTasks.new
+  gem.summary = "a ruby client for the OSC protocol"
+  gem.description = "This OSC gem originally created by Tadayoshi Funaba has been updated for ruby 1.9/JRuby compatibility"
 
-rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+  gem.authors = "Colin Harris"
+  gem.email = "qzzzq1@gmail.com"
+  gem.homepage = "http://github.com/aberant/osc-ruby"
+
+  gem.has_rdoc = true
+
+  gem.files = FileList['Rakefile', 'VERSION', 'LICENSE', 'examples/**/*', 'lib/**/*'].to_a
+  gem.test_files = FileList['spec/**/*.rb']
+end
+
+Rake::GemPackageTask.new( gemspec ) do |task|
+  task.gem_spec = gemspec
+  task.need_tar = false
+  task.need_tar_gz = true
+  task.need_tar_bz2 = true
+  task.need_zip = true
 end
