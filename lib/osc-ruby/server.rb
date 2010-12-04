@@ -1,9 +1,9 @@
 module OSC
   class  Server
 
-    def initialize( port )
+    def initialize( host, port )
       @socket = UDPSocket.new
-      @socket.bind( '', port )
+      @socket.bind( host, port )
       @matchers = []
       @queue = Queue.new
     end
