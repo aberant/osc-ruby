@@ -1,5 +1,4 @@
 require 'osc-ruby'
-require 'spec'
+require 'rspec'
 
 require 'builders/message_builder'
-

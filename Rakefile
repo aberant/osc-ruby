@@ -1,12 +1,10 @@
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 
 task :default => :spec
 
-Spec::Rake::SpecTask.new do |t|
-  t.libs << 'lib'
-  t.warning = false
+RSpec::Core::RakeTask.new do |t|
   t.rcov = false
-  t.spec_opts = ["--colour"]
+  t.rspec_opts = ["--colour"]
 end
 
 require 'rake/rdoctask'
