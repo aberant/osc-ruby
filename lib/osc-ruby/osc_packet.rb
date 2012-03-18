@@ -4,7 +4,7 @@ require 'ostruct'
 module OSC
   class OSCPacket
 
-    def self.messages_from_network( string )
+    def self.messages_from_network( string, ip_info=nil )
       messages = []
       osc = new( string )
 
@@ -13,11 +13,23 @@ module OSC
         time = osc.get_timestamp
 
         osc.get_bundle_messages.each do | message |
-          messages << decode_simple_message( time, OSCPacket.new( message ) )
+          msg = decode_simple_message( time, OSCPacket.new( message ) )
+          if ip_info
+            # Append info for the ip address
+            msg.ip_address = ip_info[1].to_s + "." + ip_info[2].to_s + "." + ip_info[3].to_s + "." + ip_info[4].to_s
+            msg.ip_port = ip_info[0]
+          end
+          messages << msg
         end
 
       else
-        messages << decode_simple_message( time, osc )
+        msg = decode_simple_message( time, osc )
+        if ip_info
+          # Append info for the ip address
+          msg.ip_address = ip_info[1].to_s + "." + ip_info[2].to_s + "." + ip_info[3].to_s + "." + ip_info[4].to_s
+          msg.ip_port = ip_info[0]
+        end
+        messages << msg
       end
 
       return messages

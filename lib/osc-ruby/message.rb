@@ -2,6 +2,8 @@ module OSC
   class Message
     attr_accessor :address
     attr_accessor :time
+    attr_accessor :ip_address
+    attr_accessor :ip_port
 
     def self.new_with_time( address, time, tags=nil, *args )
       message = new( address, tags, *args )
