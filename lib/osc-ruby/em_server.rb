@@ -5,7 +5,8 @@ module OSC
 
   class Connection < EventMachine::Connection
     def receive_data data
-     Channel << OSC::OSCPacket.messages_from_network( data )
+     ip_info = get_peername[2,6].unpack "nC4"  
+     Channel << OSC::OSCPacket.messages_from_network( data, ip_info )
     end
   end
 
