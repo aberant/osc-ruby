@@ -76,8 +76,10 @@ private
       loop do
 	      osc_data, network = @socket.recvfrom( 16384 )
 	      begin
-
-	        OSCPacket.messages_from_network( osc_data ).each do |message|
+          ip_info = Array.new
+          ip_info << network[1]
+          ip_info.concat(network[2].split('.'))
+	        OSCPacket.messages_from_network( osc_data, ip_info ).each do |message|
 	          @queue.push(message)
           end
 
