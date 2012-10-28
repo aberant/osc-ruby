@@ -27,7 +27,7 @@ for the EMServer, you will need EventMachine
   @client = OSC::Client.new( 'localhost', 3333 )
 
   @server.add_method '/greeting' do | message |
-    puts message.to_a
+    puts "#{message.ip_address}:#{message.ip_port} -- #{message.address} -- #{message.to_a}"
   end
 
   Thread.new do
@@ -49,7 +49,7 @@ for the EMServer, you will need EventMachine
   @client = OSC::Client.new( 'localhost', 3333 )
 
   @server.add_method '/greeting' do | message |
-    puts message.inspect
+    puts "#{message.ip_address}:#{message.ip_port} -- #{message.address} -- #{message.to_a}"
   end
 
   Thread.new do
@@ -69,4 +69,4 @@ Tadayoshi Funaba
 
 http://www.funaba.org/en/
 
-thx also to Toby Tripp and Obtiva
+thx also to Toby Tripp, Brian McClain, Andreas Haller, and James Hughes
