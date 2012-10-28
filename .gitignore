@@ -6,4 +6,4 @@ doc/*
 coverage/*
 html/*
 rdoc/*
-
+*.gem
