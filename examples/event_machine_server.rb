@@ -10,7 +10,7 @@ require 'osc-ruby/em_server'
 @client = OSC::Client.new( 'localhost', 3333 )
 
 @server.add_method '/greeting' do | message |
-  puts message.to_a
+  puts "#{message.ip_address}:#{message.ip_port} -- #{message.address} -- #{message.to_a}"
 end
 
 Thread.new do
