@@ -1,6 +1,6 @@
 require File.join( File.dirname( __FILE__ ), "osc_argument" )
 
- module OSC
+module OSC
   class OSCInt32 < OSCArgument
     def tag() 'i' end
     def encode() [@val].pack('N') end
