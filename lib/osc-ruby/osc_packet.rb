@@ -9,7 +9,7 @@ module OSC
       osc = new( string )
 
       if osc.bundle?
-        bundle = osc.get_string
+        osc.get_string #=> bundle
         time = osc.get_timestamp
 
         osc.get_bundle_messages.each do | message |
