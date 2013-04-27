@@ -72,6 +72,7 @@ module OSC
     end
 
     def get_timestamp
+      #TODO: refactor this so a mortal can figure it out
       t1 = @packet.getn(4).unpack('N')[0]
       t2 = @packet.getn(4).unpack('N')[0]
       @packet.skip_padding
@@ -123,7 +124,6 @@ module OSC
     end
 
     def string_delemeter
-      # ruby 1.9 has multicharacter support
      "\x00"
     end
   end
