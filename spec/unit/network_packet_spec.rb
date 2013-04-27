@@ -30,4 +30,8 @@ describe OSC::NetworkPacket do
   it "should be able to get a number of characters from the stream" do
     @simple.getn(3).should == "abc"
   end
+
+  it "outputs characters with ASCII/BINARY encoding" do
+    @simple.getc.encoding.to_s.should == "ASCII-8BIT"
+  end
 end

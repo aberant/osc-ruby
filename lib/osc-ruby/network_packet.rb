@@ -1,7 +1,7 @@
 module OSC
   class NetworkPacket
     def initialize(str)
-      @str, @index = str, 0
+      @str, @index = str.force_encoding("BINARY"), 0
     end
 
     def to_s
