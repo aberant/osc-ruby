@@ -8,7 +8,7 @@ RSpec::Core::RakeTask.new do |t|
 end
 
 require 'rdoc/task'
-Rake::RDocTask.new do |rdoc|
+RDoc::Task.new do |rdoc|
   if File.exist?('VERSION')
     version = File.read('VERSION')
   else
