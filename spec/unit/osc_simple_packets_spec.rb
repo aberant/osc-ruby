@@ -44,7 +44,7 @@ describe OSC::OSCPacket do
     msg.first.to_a.should == [@first_int, @second_int]
   end
 
-  it "shold decode address with float arg" do
+  it "should decode address with float arg" do
     sent_msg = @builder.with_float( @first_float ).build
 
     msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
@@ -53,7 +53,7 @@ describe OSC::OSCPacket do
   end
 
 
-  it "shold decode address with two float args" do
+  it "should decode address with two float args" do
     sent_msg = @builder.with_float( @first_float ).with_float( @second_float).build
 
     msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
