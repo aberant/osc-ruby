@@ -124,7 +124,7 @@ module OSC
 
     def string_delemeter
       # ruby 1.9 has multicharacter support
-      RUBY_VERSION.include?( '1.9' ) ? "\x00" : 0
+     "\x00"
     end
   end
 end
