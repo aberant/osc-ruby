@@ -37,6 +37,23 @@ describe OSC::Message do
     end
   end
   
+  describe "message output encoding" do
+    it "integer arguments output binary/ascii string" do
+      m = OSC::Message.new( "/hi", 42 ).encode
+      m.encoding.to_s.should == "ASCII-8BIT"
+    end
+
+    it "string arguments output binary/ascii string" do
+      m = OSC::Message.new( "/hi", "42" ).encode
+      m.encoding.to_s.should == "ASCII-8BIT"
+    end
+
+    it "float arguments output binary/ascii string" do
+      m = OSC::Message.new( "/hi", 3.14159 ).encode
+      m.encoding.to_s.should == "ASCII-8BIT"
+    end
+  end
+
   describe "more interesting traits" do
     before :each do
       @builder = MessageBuilder.new
@@ -45,8 +62,6 @@ describe OSC::Message do
              
       @message = @builder.build
     end
-  
-
   
     it "should know equality" do
       @message2 = @builder.build
