@@ -4,7 +4,7 @@ task :default => :spec
 
 RSpec::Core::RakeTask.new do |t|
   t.rcov = false
-  t.rspec_opts = ["--colour"]
+  t.rspec_opts = ["--colour", "--format", "documentation"]
 end
 
 require 'rdoc/task'
