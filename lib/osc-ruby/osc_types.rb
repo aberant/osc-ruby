@@ -8,7 +8,7 @@ module OSC
 
   class OSCFloat32 < OSCArgument
     def tag() 'f' end
-    def encode() [@val].pack('g') end # fake - why fake?
+    def encode() [@val].pack('g') end 
   end
 
   class OSCString < OSCArgument
