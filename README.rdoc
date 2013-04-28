@@ -6,7 +6,7 @@ http://opensoundcontrol.org/
 
 This OSC gem originally created by Tadayoshi Funaba has been updated for ruby 1.9 compatibility.  I've made a point to make this code as expressive as possible and provide a test suite for confident hacking.  It also should be flexible enough to support most crazy ideas.
 
-Compatible with ruby 1.8, 1.9, and jruby
+Compatible with ruby 1.9, 2.0 and jruby
 
 == Install
 
@@ -16,9 +16,9 @@ for the EMServer, you will need EventMachine
 
   sudo gem install eventmachine
 
-== Event Machine example
+== Event Machine Basic example
   
-  # compatible with ruby 1.8, 1.9, and jruby
+  # compatible with ruby 1.9, 2.0 and jruby
   require 'rubygems'
   require 'osc-ruby'
   require 'osc-ruby/em_server'
@@ -35,28 +35,6 @@ for the EMServer, you will need EventMachine
   end
 
   @client.send( OSC::Message.new( "/greeting" , "hullo!" ))
-
-  sleep( 3 )
-  
-== Classic example
-
-  # compatible with ruby 1.8
-  require 'rubygems'
-  require 'osc-ruby'
-
-
-  @server = OSC::Server.new( 3333 )
-  @client = OSC::Client.new( 'localhost', 3333 )
-
-  @server.add_method '/greeting' do | message |
-    puts "#{message.ip_address}:#{message.ip_port} -- #{message.address} -- #{message.to_a}"
-  end
-
-  Thread.new do
-    @server.run
-  end
-
-  @client.send( OSC::Message.new( "/greeting", "hullo!" ))
 
   sleep( 3 )
   
