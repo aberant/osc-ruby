@@ -24,7 +24,9 @@ private
           @pattern.gsub!(/\?/, '[^/]')
 
           # handles ** - used in creating osc routers
-          @pattern.gsub!(/\*\*/, '.*' )
+          # TODO: turns out the OSC 1.1 spec says that we shoudl use "//" 
+          # this will be implemented in the next major release of this gem
+          #@pattern.gsub!(/\*\*/, '.*' )
 
           # handles osc * - 0 or more matching
           @pattern.gsub!(/\*[^\*]/, '[^/]*')

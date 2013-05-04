@@ -1,3 +1,6 @@
-=== 1.0.0 / 2012-10-28
+1.1.0 / 2013-05-03 
+  * made gem compatible with ruby 2.0
+  * dropped compatibility with 1.8.X ruby
 
-* Extracted gemspec file from Rakefile so that people can use bundler to build gem from github.
+1.0.0 / 2012-10-28
+  * Extracted gemspec file from Rakefile so that people can use bundler to build gem from github.

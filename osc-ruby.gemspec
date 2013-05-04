@@ -3,7 +3,7 @@ Gem::Specification.new do |gem|
   gem.version   = File.read('VERSION')
 
   gem.summary = "a ruby client for the OSC protocol"
-  gem.description = "This OSC gem originally created by Tadayoshi Funaba has been updated for ruby 1.9/JRuby compatibility"
+  gem.description = "This OSC gem originally created by Tadayoshi Funaba has been updated for ruby 2.0/1.9/JRuby compatibility"
 
   gem.authors = "Colin Harris"
   gem.email = "qzzzq1@gmail.com"
@@ -13,4 +13,6 @@ Gem::Specification.new do |gem|
 
   gem.files = Dir['Rakefile', 'VERSION', 'LICENSE', 'examples/**/*', 'lib/**/*']
   gem.test_files = Dir['spec/**/*.rb']
+  
+  gem.add_development_dependency "rspec"
 end
