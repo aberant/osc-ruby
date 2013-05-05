@@ -2,6 +2,10 @@
 
 http://opensoundcontrol.org/
 
+== A quick word about this branch
+
+I'm updating my library to support OSC 1.1.  Don't be fooled by passing tests!  This branch will be in a state of upheaval until it's merged into master.
+
 == Description
 
 This OSC gem originally created by Tadayoshi Funaba has been updated for ruby 1.9 compatibility.  I've made a point to make this code as expressive as possible and provide a test suite for confident hacking.  It also should be flexible enough to support most crazy ideas.
