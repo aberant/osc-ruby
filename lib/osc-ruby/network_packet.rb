@@ -37,5 +37,10 @@ module OSC
     	skip(1)
     	c
     end
+
+    def bundle_packet?
+      # it's wonky, but we get booleans out of it
+      !(@str =~ /\A\#bundle/).nil?
+    end
   end
 end

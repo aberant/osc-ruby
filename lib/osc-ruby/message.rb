@@ -14,7 +14,13 @@ module OSC
     def initialize( address, *args )
       @address = address
       @args = []
-
+      # TODO: we need to have this connected to a factory that takes in non-osc arguments ( plain ruby arugments )
+      # and returns the correct OSC object
+      # for eg.
+      # Integer <=> i
+      # True <=> T
+      # nil <=> N
+      # Time <=> t
       args.each do |arg|
         case arg
           when Integer;     @args << OSCInt32.new(arg)

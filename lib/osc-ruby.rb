@@ -6,7 +6,9 @@ require 'osc-ruby/core_ext/numeric'
 require 'osc-ruby/core_ext/time'
 
 # jus the basics
+require 'osc-ruby/network_packet'
 require 'osc-ruby/osc_types'
+require 'osc-ruby/parsers'
 require 'osc-ruby/osc_packet'
 
 require 'osc-ruby/message'
