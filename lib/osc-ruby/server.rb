@@ -17,6 +17,10 @@ module OSC
       @socket.close
     end
 
+    def send(msg, address, port)
+      @socket.send msg, 0, address, port
+    end
+
     def add_method( address_pattern, &proc )
       matcher = AddressPattern.new( address_pattern )
 
