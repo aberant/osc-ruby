@@ -18,7 +18,7 @@ module OSC
     end
 
     def send(msg, address, port)
-      @socket.send msg, 0, address, port
+      @socket.send msg.encode, 0, address, port
     end
 
     def add_method( address_pattern, &proc )
