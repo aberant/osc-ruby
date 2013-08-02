@@ -93,7 +93,9 @@ module OSC
         args = []
 
         tags.scan(/./) do | tag |
-          args << @types[tag].call
+          type_handler = @types[tag]
+          raise "Unknown OSC type: #{tag}" unless type_handler
+          args << type_handler.call
         end
         args
       end
