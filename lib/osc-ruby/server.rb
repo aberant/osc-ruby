@@ -1,5 +1,8 @@
 module OSC
   class  Server
+
+    attr_accessor :socket
+
     def initialize( port )
       @socket = UDPSocket.new
       @socket.bind( '', port )
