@@ -8,7 +8,12 @@ module OSC
 
   class OSCFloat32 < OSCArgument
     def tag() 'f' end
-    def encode() [@val].pack('g').force_encoding("BINARY") end 
+    def encode() [@val].pack('g').force_encoding("BINARY") end
+  end
+
+  class OSCDouble64 < OSCArgument
+    def tag() 'd' end
+    def encode() [@val].pack('G').force_encoding("BINARY") end
   end
 
   class OSCString < OSCArgument
