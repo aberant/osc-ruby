@@ -105,4 +105,14 @@ describe OSC::OSCPacket do
     args = msg.first.to_a
     args.first.must_equal( @first_blob )
   end
+
+  it "should decode messages with double64 types" do
+    pi = 3.14159
+
+    sent_msg = @builder.with_double( pi ).build
+    msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
+
+    args = msg.first.to_a
+    args.first.must_be_close_to( pi, 0.001 )
+  end
 end

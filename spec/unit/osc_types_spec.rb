@@ -12,6 +12,12 @@ describe OSC::OSCFloat32 do
   end
 end
 
+describe OSC::OSCDouble64 do
+  it "should not blow up" do
+    OSC::OSCDouble64.new 1.0
+  end
+end
+
 describe OSC::OSCString do
   it "should not blow up" do
     OSC::OSCString.new "1"

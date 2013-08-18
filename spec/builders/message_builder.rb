@@ -16,6 +16,11 @@ class MessageBuilder
     with_arg( "f", float )
     self
   end
+
+  def with_double( double )
+    with_arg( "d", double)
+    self
+  end
   
   def with_int( int )
     with_arg( "i", int )
