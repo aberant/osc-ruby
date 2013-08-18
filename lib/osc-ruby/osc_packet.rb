@@ -2,6 +2,8 @@ require File.join( File.dirname( __FILE__ ), 'network_packet')
 require 'ostruct'
 
 module OSC
+  class UnknownType < StandardError; end
+
   class OSCPacket
 
     def self.messages_from_network( string, ip_info=nil )
@@ -94,7 +96,7 @@ module OSC
 
         tags.scan(/./) do | tag |
           type_handler = @types[tag]
-          raise "Unknown OSC type: #{tag}" unless type_handler
+          raise( UnknownType, "Unknown OSC type: #{tag}" ) unless type_handler
           args << type_handler.call
         end
         args
