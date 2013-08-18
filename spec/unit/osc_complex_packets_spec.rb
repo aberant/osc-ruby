@@ -9,31 +9,31 @@ describe OSC::OSCPacket do
   end
   
   it "should have three messages" do
-    @messages.should have(3).items
+    @messages.size.must_equal 3
   end
   
   it "should have the propper address for the messages" do
     3.times do |i|
-      @messages[i].address.should eql("/tuio/2Dobj")
+      @messages[i].address.must_equal("/tuio/2Dobj")
     end
   end
   
   it "should have a first message with two strings" do
     args = @messages[0].to_a
     
-    args[0].should eql( "source" )
-    args[1].should eql( "simulator" )
+    args[0].must_equal( "source" )
+    args[1].must_equal( "simulator" )
   end
   
   it "should have a second message with one string" do
     args = @messages[1].to_a
-    args[0].should eql( "alive" )
+    args[0].must_equal( "alive" )
   end
   
   it "should have a third message with a string and an int" do
     args = @messages[2].to_a
     
-    args[0].should eql( "fseq" )
-    args[1].should eql(-1)
+    args[0].must_equal( "fseq" )
+    args[1].must_equal(-1)
   end
 end

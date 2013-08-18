@@ -13,6 +13,4 @@ Gem::Specification.new do |gem|
 
   gem.files = Dir['Rakefile', 'VERSION', 'LICENSE', 'examples/**/*', 'lib/**/*']
   gem.test_files = Dir['spec/**/*.rb']
-  
-  gem.add_development_dependency "rspec"
 end

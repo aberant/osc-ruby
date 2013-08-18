@@ -25,7 +25,7 @@ describe OSC::OSCPacket do
 
     msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
 
-    msg.first.address.should == @address
+    msg.first.address.must_equal @address
   end
 
   it "should decode the int arg of a simple message from the network data" do
@@ -33,7 +33,7 @@ describe OSC::OSCPacket do
 
     msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
 
-    msg.first.to_a.should == [@first_int]
+    msg.first.to_a.must_equal [@first_int]
   end
 
   it "should decode two int args" do
@@ -41,7 +41,7 @@ describe OSC::OSCPacket do
 
     msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
 
-    msg.first.to_a.should == [@first_int, @second_int]
+    msg.first.to_a.must_equal [@first_int, @second_int]
   end
 
   it "should decode address with float arg" do
@@ -49,18 +49,18 @@ describe OSC::OSCPacket do
 
     msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
 
-    msg.first.to_a[0].should be_within( 0.001 ).of( @first_float )
+    msg.first.to_a[0].must_be_close_to( @first_float, 0.001 )
   end
 
 
   it "should decode address with two float args" do
-    sent_msg = @builder.with_float( @first_float ).with_float( @second_float).build
+    sent_msg = @builder.with_float( @first_float ).with_float( @second_float ).build
 
     msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
 
     args = msg.first.to_a
-    args.first.should be_within( 0.001 ).of( @first_float )
-    args[1].should be_within( 0.001 ).of( @second_float )
+    args.first.must_be_close_to( @first_float, 0.001 )
+    args[1].must_be_close_to( @second_float, 0.001 )
   end
 
   it "should decode address with string arg" do
@@ -68,7 +68,7 @@ describe OSC::OSCPacket do
 
     msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
 
-    msg.first.to_a.should == [@first_string]
+    msg.first.to_a.must_equal [@first_string]
   end
 
   it "should decode address with multiple string args" do
@@ -76,8 +76,8 @@ describe OSC::OSCPacket do
     msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
 
     args = msg.first.to_a
-    args[0].should eql @first_string
-    args[1].should eql @second_string
+    args[0].must_equal @first_string
+    args[1].must_equal @second_string
   end
 
 
@@ -91,9 +91,9 @@ describe OSC::OSCPacket do
 
     args = msg.first.to_a
 
-    args[0].should eql( @first_int )
-    args[1].should be_within( 0.001 ).of( @second_float )
-    args[2].should eql( @first_string )
+    args[0].must_equal( @first_int )
+    args[1].must_be_close_to( @second_float, 0.001 )
+    args[2].must_equal( @first_string )
   end
 
   it "should decode messages with blobs" do
@@ -103,6 +103,6 @@ describe OSC::OSCPacket do
     msg = OSC::OSCPacket.messages_from_network( sent_msg.encode )
 
     args = msg.first.to_a
-    args.first.should eql( @first_blob )
+    args.first.must_equal( @first_blob )
   end
 end

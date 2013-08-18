@@ -1,4 +1,4 @@
 require 'osc-ruby'
-require 'rspec'
+require "minitest/autorun"
 
 require 'builders/message_builder'

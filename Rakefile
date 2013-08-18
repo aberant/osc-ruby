@@ -1,11 +1,11 @@
-require 'rspec/core/rake_task'
+require "rake/testtask"
+
+Rake::TestTask.new(:spec) do |t| 
+  t.libs << "spec"
+  t.pattern = "spec/**/*_spec.rb"
+end
 
 task :default => :spec
-
-RSpec::Core::RakeTask.new do |t|
-  t.rcov = false
-  t.rspec_opts = ["--colour", "--format", "documentation"]
-end
 
 require 'rdoc/task'
 RDoc::Task.new do |rdoc|

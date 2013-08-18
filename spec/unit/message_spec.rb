@@ -15,42 +15,42 @@ describe OSC::Message do
   describe "basic traits" do
     it "should have no arguments if you define none" do
       m = OSC::Message.new( "/hi" )
-      m.to_a.should == []
+      m.to_a.must_equal []
     end
 
     it "should accept int arguments" do
       m = OSC::Message.new( "/hi", 42 )
-      m.to_a.should == [42]
-      m.tags.should == "i"
+      m.to_a.must_equal [42]
+      m.tags.must_equal "i"
     end
 
     it "should accept string arguments" do
       m = OSC::Message.new( "/hi", "42" )
-      m.to_a.should == ["42"]
-      m.tags.should == "s"
+      m.to_a.must_equal ["42"]
+      m.tags.must_equal "s"
     end
     
     it "should accept float arguments" do
       m = OSC::Message.new( "/hi", 42.001 )
-      m.to_a.should == [42.001]
-      m.tags.should == "f"
+      m.to_a.must_equal [42.001]
+      m.tags.must_equal "f"
     end
   end
   
   describe "message output encoding" do
     it "integer arguments output binary/ascii string" do
       m = OSC::Message.new( "/hi", 42 ).encode
-      m.encoding.to_s.should == "ASCII-8BIT"
+      m.encoding.to_s.must_equal "ASCII-8BIT"
     end
 
     it "string arguments output binary/ascii string" do
       m = OSC::Message.new( "/hi", "42" ).encode
-      m.encoding.to_s.should == "ASCII-8BIT"
+      m.encoding.to_s.must_equal "ASCII-8BIT"
     end
 
     it "float arguments output binary/ascii string" do
       m = OSC::Message.new( "/hi", 3.14159 ).encode
-      m.encoding.to_s.should == "ASCII-8BIT"
+      m.encoding.to_s.must_equal "ASCII-8BIT"
     end
   end
 
@@ -66,8 +66,8 @@ describe OSC::Message do
     it "should know equality" do
       @message2 = @builder.build
     
-      @message.object_id.should_not == @message2.object_id
-      @message.should == @message2
+      @message.object_id.wont_equal @message2.object_id
+      @message.must_equal @message2
     end
   end
 end
