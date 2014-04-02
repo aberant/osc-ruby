@@ -16,5 +16,6 @@ require 'osc-ruby/address_pattern'
 # now we gettin fancy
 require 'osc-ruby/server'
 require 'osc-ruby/client'
+require 'osc-ruby/broadcast_client'
 
 
