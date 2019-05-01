@@ -1,6 +1,6 @@
 = An OSC client for Ruby
 
-[![Build Status](https://travis-ci.com/aberant/osc-ruby.svg?branch=master)](https://travis-ci.com/aberant/osc-ruby)
+{<img src="https://travis-ci.com/aberant/osc-ruby.svg?branch=master" alt="Build Status" />}[https://travis-ci.com/aberant/osc-ruby]
 
 http://opensoundcontrol.org/
 
