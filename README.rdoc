@@ -6,7 +6,7 @@ http://opensoundcontrol.org/
 
 This OSC gem originally created by Tadayoshi Funaba has been updated for ruby 1.9 compatibility.  I've made a point to make this code as expressive as possible and provide a test suite for confident hacking.  It also should be flexible enough to support most crazy ideas.
 
-Compatible with ruby 1.9, 2.0 and jruby
+Compatible with ruby 1.9, 2.* and jruby
 
 == Install
 
@@ -18,7 +18,6 @@ for the EMServer, you will need EventMachine
 
 == Event Machine Basic example
   
-  # compatible with ruby 1.9, 2.0 and jruby
   require 'rubygems'
   require 'osc-ruby'
   require 'osc-ruby/em_server'
