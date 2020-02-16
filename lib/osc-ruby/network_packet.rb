@@ -12,7 +12,7 @@ module OSC
       @str.length - @index
     end
 
-    def eof? ()
+    def eof?()
       rem <= 0
     end
 
