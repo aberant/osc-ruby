@@ -24,28 +24,28 @@ describe OSC::OSCPacket do
     sent_msg = @builder.build
     msg = OSC::OSCPacket.messages_from_network(sent_msg.encode)
 
-    msg.first.address.must_equal(@address)
+    _(msg.first.address).must_equal(@address)
   end
 
   it "should decode the int arg of a simple message from the network data" do
     sent_msg = @builder.with_int(@first_int).build
     msg = OSC::OSCPacket.messages_from_network(sent_msg.encode)
 
-    msg.first.to_a.must_equal([@first_int])
+    _(msg.first.to_a).must_equal([@first_int])
   end
 
   it "should decode two int args" do
     sent_msg = @builder.with_int(@first_int ).with_int( @second_int).build
     msg = OSC::OSCPacket.messages_from_network(sent_msg.encode)
 
-    msg.first.to_a.must_equal([@first_int, @second_int])
+    _(msg.first.to_a).must_equal([@first_int, @second_int])
   end
 
   it "should decode address with float arg" do
     sent_msg = @builder.with_float(@first_float).build
     msg = OSC::OSCPacket.messages_from_network(sent_msg.encode)
 
-    msg.first.to_a[0].must_be_close_to(@first_float, 0.001)
+    _(msg.first.to_a[0]).must_be_close_to(@first_float, 0.001)
   end
 
 
@@ -54,15 +54,15 @@ describe OSC::OSCPacket do
     msg = OSC::OSCPacket.messages_from_network(sent_msg.encode)
 
     args = msg.first.to_a
-    args.first.must_be_close_to(@first_float, 0.001)
-    args[1].must_be_close_to(@second_float, 0.001)
+    _(args.first).must_be_close_to(@first_float, 0.001)
+    _(args[1]).must_be_close_to(@second_float, 0.001)
   end
 
   it "should decode address with string arg" do
     sent_msg = @builder.with_string(@first_string).build
     msg = OSC::OSCPacket.messages_from_network(sent_msg.encode)
 
-    msg.first.to_a.must_equal([@first_string])
+    _(msg.first.to_a).must_equal([@first_string])
   end
 
   it "should decode address with multiple string args" do
@@ -70,8 +70,8 @@ describe OSC::OSCPacket do
     msg = OSC::OSCPacket.messages_from_network(sent_msg.encode)
 
     args = msg.first.to_a
-    args[0].must_equal(@first_string)
-    args[1].must_equal(@second_string)
+    _(args[0]).must_equal(@first_string)
+    _(args[1]).must_equal(@second_string)
   end
 
 
@@ -85,9 +85,9 @@ describe OSC::OSCPacket do
 
     args = msg.first.to_a
 
-    args[0].must_equal(@first_int)
-    args[1].must_be_close_to(@second_float, 0.001)
-    args[2].must_equal(@first_string)
+    _(args[0]).must_equal(@first_int)
+    _(args[1]).must_be_close_to(@second_float, 0.001)
+    _(args[2]).must_equal(@first_string)
   end
 
   it "should decode messages with blobs" do
@@ -97,7 +97,7 @@ describe OSC::OSCPacket do
     msg = OSC::OSCPacket.messages_from_network(sent_msg.encode)
 
     args = msg.first.to_a
-    args.first.must_equal(@first_blob)
+    _(args.first).must_equal(@first_blob)
   end
 
   it "should decode messages with double64 types" do
@@ -107,6 +107,6 @@ describe OSC::OSCPacket do
     msg = OSC::OSCPacket.messages_from_network(sent_msg.encode)
 
     args = msg.first.to_a
-    args.first.must_be_close_to(pi, 0.001)
+    _(args.first).must_be_close_to(pi, 0.001)
   end
 end

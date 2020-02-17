@@ -5,8 +5,6 @@ describe OSC::OSCPacket do
     class OSC::BadType < OSC::OSCInt32; def tag() 'Z'; end end
     sent_msg = OSC::Message.new("/badtype", OSC::BadType.new(42))
 
-    lambda do
-      OSC::OSCPacket.messages_from_network(sent_msg.encode)
-    end.must_raise OSC::UnknownType
+    _ {OSC::OSCPacket.messages_from_network(sent_msg.encode)}.must_raise OSC::UnknownType
   end
 end

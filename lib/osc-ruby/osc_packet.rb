@@ -53,28 +53,28 @@ module OSC
        "s" => lambda{  OSCString.new(get_string)},
        "b" => lambda{  OSCBlob.new(get_blob)}
      }
-   end
-
-   def get_bundle_messages
-    bundle_messages = []
-
-    until @packet.eof?
-      l = @packet.getn(4).unpack('N')[0]
-      bundle_messages << @packet.getn(l)
     end
-    bundle_messages
-  end
 
-  def get_string
-    result = ''
-    until (c = @packet.getc) == string_delemeter
-     result << c
-   end
-   @packet.skip_padding
-   result
- end
+    def get_bundle_messages
+      bundle_messages = []
 
- def get_timestamp
+      until @packet.eof?
+        l = @packet.getn(4).unpack('N')[0]
+        bundle_messages << @packet.getn(l)
+      end
+      bundle_messages
+    end
+
+    def get_string
+      result = ''
+      until ((c = @packet.getc) == string_delemeter)
+        result << c
+      end
+      @packet.skip_padding
+      result
+    end
+
+    def get_timestamp
       #TODO: refactor this so a mortal can figure it out
       t1 = @packet.getn(4).unpack('N')[0]
       t2 = @packet.getn(4).unpack('N')[0]
@@ -90,8 +90,7 @@ module OSC
     end
 
     def get_arguments
-      if @packet.getc == ?,
-
+      if (@packet.getc == ?,)
         tags = get_string
         args = []
 
