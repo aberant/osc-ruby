@@ -1,21 +1,20 @@
-require File.join( File.dirname( __FILE__ ), 'network_packet')
+require File.join(File.dirname( __FILE__ ), 'network_packet')
 require 'ostruct'
 
 module OSC
   class UnknownType < StandardError; end
 
   class OSCPacket
-
-    def self.messages_from_network( string, ip_info=nil )
+    def self.messages_from_network(string, ip_info=nil)
       messages = []
-      osc = new( string )
+      osc = new(string)
 
       if osc.bundle?
-        osc.get_string #=> bundle
+        osc.get_string
         time = osc.get_timestamp
 
-        osc.get_bundle_messages.each do | message |
-          msg = decode_simple_message( time, OSCPacket.new( message ) )
+        osc.get_bundle_messages.each do |message|
+          msg = decode_simple_message(time, OSCPacket.new(message))
           if ip_info
             # Append info for the ip address
             msg.ip_port = ip_info.shift
@@ -25,11 +24,11 @@ module OSC
         end
 
       else
-        msg = decode_simple_message( time, osc )
+        msg = decode_simple_message(time, osc)
         if ip_info
           # Append info for the ip address
-            msg.ip_port = ip_info.shift
-            msg.ip_address = ip_info.join(".")
+          msg.ip_port = ip_info.shift
+          msg.ip_address = ip_info.join(".")
         end
         messages << msg
       end
@@ -37,44 +36,45 @@ module OSC
       return messages
     end
 
-    def self.decode_simple_message( time, osc_packet )
+    def self.decode_simple_message(time, osc_packet)
       address = osc_packet.get_string
       args = osc_packet.get_arguments
 
-      Message.new_with_time(address, time, nil, *args )
+      Message.new_with_time(address, time, nil, *args)
     end
 
-    def initialize( string )
-      @packet = NetworkPacket.new( string )
+    def initialize(string)
+      @packet = NetworkPacket.new(string)
 
-      @types = { "i" => lambda{  OSCInt32.new(    get_int32 ) },
-                 "f" => lambda{  OSCFloat32.new(  get_float32 ) },
-                 "d" => lambda{  OSCDouble64.new( get_double64 )},
-                 "s" => lambda{  OSCString.new(   get_string ) },
-                 "b" => lambda{  OSCBlob.new(     get_blob )}
-                }
+      @types = {
+       "i" => lambda{OSCInt32.new(get_int32)},
+       "f" => lambda{  OSCFloat32.new(get_float32)},
+       "d" => lambda{  OSCDouble64.new(get_double64)},
+       "s" => lambda{  OSCString.new(get_string)},
+       "b" => lambda{  OSCBlob.new(get_blob)}
+     }
+   end
+
+   def get_bundle_messages
+    bundle_messages = []
+
+    until @packet.eof?
+      l = @packet.getn(4).unpack('N')[0]
+      bundle_messages << @packet.getn(l)
     end
+    bundle_messages
+  end
 
-    def get_bundle_messages
-      bundle_messages = []
+  def get_string
+    result = ''
+    until (c = @packet.getc) == string_delemeter
+     result << c
+   end
+   @packet.skip_padding
+   result
+ end
 
-      until @packet.eof?
-        l = @packet.getn(4).unpack('N')[0]
-        bundle_messages << @packet.getn(l)
-      end
-      bundle_messages
-    end
-
-    def get_string
-      result = ''
-      until (c = @packet.getc) == string_delemeter
-	      result << c
-      end
-      @packet.skip_padding
-      result
-    end
-
-    def get_timestamp
+ def get_timestamp
       #TODO: refactor this so a mortal can figure it out
       t1 = @packet.getn(4).unpack('N')[0]
       t2 = @packet.getn(4).unpack('N')[0]
@@ -95,9 +95,9 @@ module OSC
         tags = get_string
         args = []
 
-        tags.scan(/./) do | tag |
+        tags.scan(/./) do |tag|
           type_handler = @types[tag]
-          raise( UnknownType, "Unknown OSC type: #{tag}" ) unless type_handler
+          raise(UnknownType, "Unknown OSC type: #{tag}") unless type_handler
           args << type_handler.call
         end
         args
@@ -135,7 +135,7 @@ module OSC
     end
 
     def string_delemeter
-     "\x00"
+      "\x00"
     end
   end
 end

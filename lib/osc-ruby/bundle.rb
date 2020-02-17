@@ -15,9 +15,11 @@ module OSC
       end.join
     end
 
-    def to_a() @args.collect{|x| x.to_a} end
+    def to_a
+      @args.collect{|x| x.to_a}
+    end
 
-  private
+    private
 
     def encode_timetag(t)
       case t
@@ -25,20 +27,20 @@ module OSC
           t1 = 0
           t2 = 1
         when Numeric
-          t1, t2 = construct_timetag( t )
+          t1, t2 = construct_timetag(t)
         when Time
-          t1, t2 = construct_timetag( t.to_ntp )
+          t1, t2 = construct_timetag(t.to_ntp)
         else
-          raise ArgumentError, 'invalid time'
+          raise(ArgumentError, 'invalid time')
+        end
+        [t1, t2].pack('N2')
       end
-      [t1, t2].pack('N2')
-    end
 
-    def construct_timetag( time )
-      t1, fr = time.divmod(1)
-      t2 = (fr * (2**32)).to_i
+      def construct_timetag(time)
+        t1, fr = time.divmod(1)
+        t2 = (fr * (2**32)).to_i
 
-      [t1, t2]
+        [t1, t2]
+      end
     end
   end
-end

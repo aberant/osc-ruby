@@ -17,5 +17,3 @@ require 'osc-ruby/address_pattern'
 require 'osc-ruby/server'
 require 'osc-ruby/client'
 require 'osc-ruby/broadcast_client'
-
-

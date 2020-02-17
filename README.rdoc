@@ -13,17 +13,17 @@ Compatible with ruby 1.9, 2.* and jruby
 == Install
 
   sudo gem install osc-ruby
-  
+
 for the EMServer, you will need EventMachine
 
   sudo gem install eventmachine
 
 == Event Machine Basic example
-  
+
   require 'rubygems'
   require 'osc-ruby'
   require 'osc-ruby/em_server'
-  
+
   @server = OSC::EMServer.new( 3333 )
   @client = OSC::Client.new( 'localhost', 3333 )
 
@@ -38,8 +38,8 @@ for the EMServer, you will need EventMachine
   @client.send( OSC::Message.new( "/greeting" , "hullo!" ))
 
   sleep( 3 )
-  
-  
+
+
 == Credits
 
 Originally created by...
