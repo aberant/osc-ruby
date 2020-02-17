@@ -14,7 +14,7 @@ module OSC
 
     def generate_regex_from_pattern
       case @pattern
-      when NIL
+      when nil
         @re = @pattern
       when Regexp
         @re = @pattern
