@@ -7,3 +7,6 @@ coverage/*
 html/*
 rdoc/*
 *.gem
+.bundle
+Gemfile.lock
+vendor/bundle
