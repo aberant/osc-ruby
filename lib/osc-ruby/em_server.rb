@@ -20,8 +20,7 @@ module OSC
 
     def run
       EM.error_handler{ |e|
-        puts "Error raised in EMServer: #{e.message}"
-        puts e.backtrace
+        Thread.main.raise e
       }
 
       EM.run do
