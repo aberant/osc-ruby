@@ -1,2 +1,2 @@
 #!/bin/bash
-irb -r lib/osc-ruby.rb
+irb  -I lib -r osc-ruby
