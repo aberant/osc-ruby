@@ -58,7 +58,7 @@ module OSC
       else # spawn a thread to wait until it's time
         Thread.fork do
           sleep(diff)
-          sendmesg(mesg)
+          sendmesg(message)
           Thread.exit
         end
       end
