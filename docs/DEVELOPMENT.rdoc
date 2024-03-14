@@ -1,0 +1,13 @@
+= Local Development Guide
+
+== Install Dependencies
+	
+	bundle install
+
+== Run Tests
+
+	rake
+
+== Build gem
+
+	gem build
