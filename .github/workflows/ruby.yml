@@ -8,7 +8,10 @@
 name: Ruby
 
 on:
-  push
+  push:
+    branches:
+      - master
+  pull_request:
 
 permissions:
   contents: read
