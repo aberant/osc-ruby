@@ -66,7 +66,7 @@ module OSC
     end
 
     def get_string
-      result = ''
+      result = String.new
       until ((c = @packet.getc) == string_delemeter)
         result << c
       end

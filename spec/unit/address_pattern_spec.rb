@@ -29,7 +29,7 @@ describe OSC::AddressPattern do
   end
 
   it "should return a regex if the pattern is a string" do
-    ap = OSC::AddressPattern.new("/hi")
+    ap = OSC::AddressPattern.new("/hi".dup)
 
     _(ap.match?('/hi')).must_equal(true)
 
@@ -40,7 +40,7 @@ describe OSC::AddressPattern do
   end
 
   it "should match with question mark" do
-    ap = OSC::AddressPattern.new("/h?l")
+    ap = OSC::AddressPattern.new("/h?l".dup)
 
     _(ap.match?('/hal')).must_equal(true)
     _(ap.match?('/hel')).must_equal(true)
@@ -51,7 +51,7 @@ describe OSC::AddressPattern do
   end
 
   it "should match with *" do
-    ap = OSC::AddressPattern.new("/believ*d")
+    ap = OSC::AddressPattern.new("/believ*d".dup)
 
     _(ap.match?('/believd')).must_equal(true)
     _(ap.match?('/believed')).must_equal(true)
@@ -61,7 +61,7 @@ describe OSC::AddressPattern do
   end
 
   it "should match with []" do
-    ap = OSC::AddressPattern.new("/believ[aeiou]d")
+    ap = OSC::AddressPattern.new("/believ[aeiou]d".dup)
 
     _(ap.match?('/believad')).must_equal(true)
     _(ap.match?('/believed')).must_equal(true)
@@ -72,7 +72,7 @@ describe OSC::AddressPattern do
   end
 
   it "should match with [!]" do
-    ap = OSC::AddressPattern.new("/believ[!aeiou]d")
+    ap = OSC::AddressPattern.new("/believ[!aeiou]d".dup)
 
     _(ap.match?('/believad')).must_equal(false)
     _(ap.match?('/believed')).must_equal(false)
@@ -84,7 +84,7 @@ describe OSC::AddressPattern do
   end
 
   it "should match with {}" do
-    ap = OSC::AddressPattern.new("/{hi,bye}")
+    ap = OSC::AddressPattern.new("/{hi,bye}".dup)
 
     _(ap.match?('/hi')).must_equal(true)
     _(ap.match?('/bye')).must_equal(true)
