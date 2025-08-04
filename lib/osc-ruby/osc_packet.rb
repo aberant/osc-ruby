@@ -48,10 +48,10 @@ module OSC
 
       @types = {
        "i" => lambda{OSCInt32.new(get_int32)},
-       "f" => lambda{  OSCFloat32.new(get_float32)},
-       "d" => lambda{  OSCDouble64.new(get_double64)},
-       "s" => lambda{  OSCString.new(get_string)},
-       "b" => lambda{  OSCBlob.new(get_blob)}
+       "f" => lambda{OSCFloat32.new(get_float32)},
+       "d" => lambda{OSCDouble64.new(get_double64)},
+       "s" => lambda{OSCString.new(get_string)},
+       "b" => lambda{OSCBlob.new(get_blob)}
      }
     end
 
