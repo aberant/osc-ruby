@@ -38,7 +38,7 @@ describe MessageBuilder do
     _(mesg.build.encode).must_equal [47, 104, 105, 0, 44, 102, 102, 0, 64, 73, 15, 208, 64, 144, 0, 0].pack("C*")
   end
 
-  def binary_string(string)
-    string.force_encoding("BINARY")
+  def binary_string(val)
+    String.new(val, encoding: 'BINARY')
   end
 end

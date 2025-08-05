@@ -3,8 +3,8 @@ require File.join(File.dirname(__FILE__) , '..', 'spec_helper')
 
 describe OSC::NetworkPacket do
   before :each do
-    @empty = OSC::NetworkPacket.new("")
-    @simple = OSC::NetworkPacket.new("abc")
+    @empty = OSC::NetworkPacket.new("".dup)
+    @simple = OSC::NetworkPacket.new("abc".dup)
   end
 
   it "should know if it's at the end of the stream" do

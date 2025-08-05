@@ -3,7 +3,7 @@ require File.join( File.dirname(__FILE__) , '..', 'spec_helper' )
 
 describe OSC::OSCPacket do
   before :each do
-    @complex_packet = "#bundle\000\316\034\315T\000\003\030\370\000\000\000$/tuio/2Dobj\000,ss\000source\000\000simulator\000\000\000\000\000\000\030/tuio/2Dobj\000,s\000\000alive\000\000\000\000\000\000\034/tuio/2Dobj\000,si\000fseq\000\000\000\000\377\377\377\377"
+    @complex_packet = String.new("#bundle\000\316\034\315T\000\003\030\370\000\000\000$/tuio/2Dobj\000,ss\000source\000\000simulator\000\000\000\000\000\000\030/tuio/2Dobj\000,s\000\000alive\000\000\000\000\000\000\034/tuio/2Dobj\000,si\000fseq\000\000\000\000\377\377\377\377")
 
     @messages = OSC::OSCPacket.messages_from_network(@complex_packet)
   end
