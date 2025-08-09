@@ -6,7 +6,7 @@ module OSC
     attr_accessor :ip_port
 
     def self.new_with_time(address, time, tags=nil, *args)
-      message = new(address, tags, *args)
+      message = new(address, *args)
       message.time = time
       message
     end
