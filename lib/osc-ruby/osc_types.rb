@@ -13,6 +13,14 @@ module OSC
     [val].pack('g').force_encoding("BINARY")
   end
 
+  def self.encode_string(val)
+    (val.sub(/\000.*\z/, '') + "\000").force_encoding("BINARY")
+  end
+
+  def self.encode_blob(val)
+    ([val.size].pack('N') + val).force_encoding("BINARY")
+  end
+
   class OSCInt32 < OSCArgument
     def tag
       'i'
@@ -49,7 +57,7 @@ module OSC
     end
 
     def encode
-      padding(@val.sub(/\000.*\z/, '') + "\000").force_encoding("BINARY")
+      padding(OSC::encode_string(@val))
     end
   end
 
@@ -59,7 +67,7 @@ module OSC
     end
 
     def encode
-      padding([@val.size].pack('N') + @val).force_encoding("BINARY")
+      padding(OSC::encode_blob(@val))
     end
   end
 end
