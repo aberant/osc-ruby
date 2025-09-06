@@ -1,13 +1,25 @@
 require File.join(File.dirname(__FILE__), "osc_argument")
 
 module OSC
+  def self.encode_int(val)
+    [val].pack('N').force_encoding("BINARY")
+  end
+
+  def self.encode_f32(val)
+    [val].pack('g').force_encoding("BINARY")
+  end
+
+  def self.encode_f64(val)
+    [val].pack('g').force_encoding("BINARY")
+  end
+
   class OSCInt32 < OSCArgument
     def tag
       'i'
     end
 
     def encode
-      [@val].pack('N').force_encoding("BINARY")
+      OSC::encode_int(@val)
     end
   end
 
@@ -17,7 +29,7 @@ module OSC
     end
 
     def encode
-      [@val].pack('g').force_encoding("BINARY")
+      OSC::encode_f32(@val)
     end
   end
 
@@ -27,7 +39,7 @@ module OSC
     end
 
     def encode
-      [@val].pack('G').force_encoding("BINARY")
+      OSC::encode_f64(@val)
     end
   end
 
