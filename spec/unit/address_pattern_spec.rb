@@ -1,4 +1,5 @@
-require File.join(File.dirname(__FILE__) , '..', 'spec_helper')
+require 'spec_helper'
+require 'osc-ruby/address_pattern'
 
 describe OSC::AddressPattern do
   # it "..." do

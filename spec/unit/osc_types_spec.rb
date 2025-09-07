@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'osc-ruby/osc_types'
 
 describe OSC::OSCInt32 do
   let (:val) {42}

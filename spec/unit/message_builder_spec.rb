@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'builders/message_builder'
 
 describe MessageBuilder do
   before :each do

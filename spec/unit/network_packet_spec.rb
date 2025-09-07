@@ -1,4 +1,5 @@
-require File.join(File.dirname(__FILE__) , '..', 'spec_helper')
+require 'spec_helper'
+require 'osc-ruby/network_packet'
 
 
 describe OSC::NetworkPacket do

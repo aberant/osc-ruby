@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'osc-ruby/osc_packet'
 
 describe OSC::OSCPacket do
   before :each do
