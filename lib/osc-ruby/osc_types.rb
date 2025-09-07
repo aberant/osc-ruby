@@ -1,4 +1,3 @@
-require 'osc-ruby/osc_argument'
 require 'osc-ruby/utility/binary_string'
 
 module OSC
@@ -22,7 +21,15 @@ module OSC
     Utility::PaddedBinaryString.new([val.size].pack('N') + val)
   end
 
-  class OSCInt32 < OSCArgument
+  class OSCType
+    attr_accessor :val
+
+    def initialize(val)
+      @val = val
+    end
+  end
+
+  class OSCInt32 < OSCType
     def tag
       'i'
     end
@@ -32,7 +39,7 @@ module OSC
     end
   end
 
-  class OSCFloat32 < OSCArgument
+  class OSCFloat32 < OSCType
     def tag
       'f'
     end
@@ -42,7 +49,7 @@ module OSC
     end
   end
 
-  class OSCDouble64 < OSCArgument
+  class OSCDouble64 < OSCType
     def tag
       'd'
     end
@@ -52,7 +59,7 @@ module OSC
     end
   end
 
-  class OSCString < OSCArgument
+  class OSCString < OSCType
     def tag
       's'
     end
@@ -62,7 +69,7 @@ module OSC
     end
   end
 
-  class OSCBlob < OSCArgument
+  class OSCBlob < OSCType
     def tag
       'b'
     end
