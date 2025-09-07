@@ -90,7 +90,7 @@ module OSC
     end
 
     def get_arguments
-      if (@packet.getc == ?,)
+      if (@packet.getc == ',')
         tags = get_string
         args = []
 
