@@ -40,7 +40,7 @@ module OSC
       address = osc_packet.get_string
       args = osc_packet.get_arguments
 
-      Message.new_with_time(address, time, nil, *args)
+      Message.new_with_time(address, time, *args)
     end
 
     def initialize(string)
