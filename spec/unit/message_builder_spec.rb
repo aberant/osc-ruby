@@ -1,4 +1,4 @@
-require File.join( File.dirname(__FILE__) , '..', 'spec_helper' )
+require 'spec_helper'
 
 describe MessageBuilder do
   before :each do
@@ -36,6 +36,12 @@ describe MessageBuilder do
     with_float(4.5)
 
     _(mesg.build.encode).must_equal [47, 104, 105, 0, 44, 102, 102, 0, 64, 73, 15, 208, 64, 144, 0, 0].pack("C*")
+  end
+
+  it "encodes nil values" do
+    mesg = @builder.with_address("/hi").with_nil
+
+    _(mesg.build.encode).must_equal binary_string("/hi\000,N\000\000")
   end
 
   def binary_string(val)

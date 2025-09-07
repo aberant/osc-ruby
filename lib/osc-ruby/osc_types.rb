@@ -22,6 +22,23 @@ module OSC
   end
 
   class OSCType
+  end
+
+  class OSCNil < OSCType
+    def tag
+      'N'
+    end
+
+    def val
+      nil
+    end
+
+    def encode
+      ''
+    end
+  end
+
+  class OSCValueType < OSCType
     attr_accessor :val
 
     def initialize(val)
@@ -29,7 +46,7 @@ module OSC
     end
   end
 
-  class OSCInt32 < OSCType
+  class OSCInt32 < OSCValueType
     def tag
       'i'
     end
@@ -39,7 +56,7 @@ module OSC
     end
   end
 
-  class OSCFloat32 < OSCType
+  class OSCFloat32 < OSCValueType
     def tag
       'f'
     end
@@ -49,7 +66,7 @@ module OSC
     end
   end
 
-  class OSCDouble64 < OSCType
+  class OSCDouble64 < OSCValueType
     def tag
       'd'
     end
@@ -59,7 +76,7 @@ module OSC
     end
   end
 
-  class OSCString < OSCType
+  class OSCString < OSCValueType
     def tag
       's'
     end
@@ -69,7 +86,7 @@ module OSC
     end
   end
 
-  class OSCBlob < OSCType
+  class OSCBlob < OSCValueType
     def tag
       'b'
     end
