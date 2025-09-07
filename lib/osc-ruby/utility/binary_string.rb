@@ -9,6 +9,10 @@ module OSC
         @string == other
       end
 
+      def <<(other)
+        @string << other
+      end
+
       def +(other)
         (@string + other)
       end
@@ -27,6 +31,10 @@ module OSC
 
       def size
         @string.size
+      end
+
+      def start_with?(other)
+        @string.start_with?(other)
       end
     end
 

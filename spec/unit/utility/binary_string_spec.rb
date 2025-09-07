@@ -22,6 +22,12 @@ describe OSC::Utility::BinaryString do
   it "has a size" do
     _(bstring.size).must_equal(12)
   end
+
+  it "has a concat" do
+      bstring << "!"
+
+    _(bstring).must_equal("Rock Lobster!")  
+  end
 end
 
 describe OSC::Utility::PaddedBinaryString do

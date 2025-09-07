@@ -58,7 +58,7 @@ module OSC
     end
 
     def encode
-      padding(OSC::encode_string(@val))
+      OSC::encode_string(@val)
     end
   end
 
@@ -68,7 +68,7 @@ module OSC
     end
 
     def encode
-      padding(OSC::encode_blob(@val))
+      OSC::encode_blob(@val)
     end
   end
 end

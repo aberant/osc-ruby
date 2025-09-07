@@ -17,10 +17,5 @@ module OSC
     def to_s()
       @val.to_s
     end
-
-    private
-    def padding(s)
-      s + ("\000" * ((4 - (s.size % 4)) % 4))
-    end
   end
 end
