@@ -1,24 +1,25 @@
-require File.join(File.dirname(__FILE__), "osc_argument")
+require 'osc-ruby/osc_argument'
+require 'osc-ruby/utility/binary_string'
 
 module OSC
   def self.encode_int(val)
-    [val].pack('N').force_encoding("BINARY")
+    Utility::BinaryString.new([val].pack('N'))
   end
 
   def self.encode_f32(val)
-    [val].pack('g').force_encoding("BINARY")
+    Utility::BinaryString.new([val].pack('g'))
   end
 
   def self.encode_f64(val)
-    [val].pack('g').force_encoding("BINARY")
+    Utility::BinaryString.new([val].pack('g'))
   end
 
   def self.encode_string(val)
-    (val.sub(/\000.*\z/, '') + "\000").force_encoding("BINARY")
+    Utility::PaddedBinaryString.new(val.sub(/\000.*\z/, '') + "\000")
   end
 
   def self.encode_blob(val)
-    ([val.size].pack('N') + val).force_encoding("BINARY")
+    Utility::PaddedBinaryString.new([val.size].pack('N') + val)
   end
 
   class OSCInt32 < OSCArgument

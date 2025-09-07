@@ -1,11 +1,14 @@
-require File.join(File.dirname(__FILE__) , '..', 'spec_helper')
+require 'spec_helper'
 
 describe OSC::OSCInt32 do
   let (:val) {42}
 
   it "should not blow up" do
     int = OSC::OSCInt32.new(val)
-    _(int.encode).must_equal(OSC::encode_int(val))
+    output = int.encode
+    
+    _(output.encoding).must_equal(Encoding.find("BINARY"))
+    _(output).must_equal(OSC::encode_int(val))
   end
 end
 
@@ -35,7 +38,7 @@ end
 
 describe OSC::OSCString do
   let (:val) {"Hello, World!"}
-  
+
   it "should not blow up" do
     str = OSC::OSCString.new(val)
     output = str.encode
