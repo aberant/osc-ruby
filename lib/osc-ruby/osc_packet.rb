@@ -51,7 +51,8 @@ module OSC
        "f" => lambda{OSCFloat32.new(get_float32)},
        "d" => lambda{OSCDouble64.new(get_double64)},
        "s" => lambda{OSCString.new(get_string)},
-       "b" => lambda{OSCBlob.new(get_blob)}
+       "b" => lambda{OSCBlob.new(get_blob)},
+       "N" => lambda{OSCNil.new()}
      }
     end
 
