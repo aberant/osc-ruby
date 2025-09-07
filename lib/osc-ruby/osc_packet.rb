@@ -1,5 +1,6 @@
-require File.join(File.dirname( __FILE__ ), 'network_packet')
-require 'ostruct'
+require 'osc-ruby/message'
+require 'osc-ruby/network_packet'
+require 'osc-ruby/osc_types'
 
 module OSC
   class UnknownType < StandardError; end

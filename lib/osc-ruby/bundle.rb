@@ -1,3 +1,5 @@
+require 'osc-ruby/osc_types'
+
 module OSC
   class Bundle
     attr_accessor :timetag
