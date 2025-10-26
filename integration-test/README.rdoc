@@ -1,0 +1,20 @@
+= Integration Tests
+It's good to know if this library will work with other libraries. This is the code we use to gain some confidence osc-ruby works well with other OSC libraries.
+
+== Python
+
+We use {uv}[https://docs.astral.sh/uv/] to manage dependencies and run the python scripts.
+
+
+=== From Ruby
+
+We test osc-ruby sending to python-osc.
+
+	uv run ./integration-test/python/from-ruby/server.py
+	ruby ./integration-test/python/from-ruby/client.rb
+
+=== To Ruby
+We test osc-ruby receiving from python-osc.
+
+	ruby ./integration-test/python/to-ruby/server.rb
+	uv run ./integration-test/python/to-ruby/client.py
