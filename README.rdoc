@@ -1,6 +1,6 @@
 = An OSC client for Ruby
 
-{Build Status}[https://github.com/aberant/osc-ruby/actions/workflows/ruby.yml/badge.svg?branch=add-types-t-f-n]
+https://github.com/aberant/osc-ruby/actions/workflows/ruby.yml/badge.svg?branch=add-types-t-f-n
 
 http://opensoundcontrol.org/
 
