@@ -1,4 +1,3 @@
-require 'socket'
 require 'thread'
 
 # core extensions
