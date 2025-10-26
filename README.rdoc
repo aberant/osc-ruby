@@ -2,21 +2,20 @@
 
 {rdoc-image:http://github.com/aberant/osc-ruby/actions/workflows/ruby.yml/badge.svg}[http://github.com/aberant/osc-ruby/actions/workflows/ruby.yml/]
 
-http://opensoundcontrol.org/
+http://opensoundcontrol.org
 
 == Description
 
-This OSC gem originally created by Tadayoshi Funaba has been updated for ruby 1.9 compatibility.  I've made a point to make this code as expressive as possible and provide a test suite for confident hacking.  It also should be flexible enough to support most crazy ideas.
+This OSC gem originally created by Tadayoshi Funaba has been updated for modern ruby compatibility.  I've made a point to make this code as expressive as possible and provide a test suite for confident hacking.  It also should be flexible enough to support most crazy ideas.
 
-Compatible with ruby 1.9, 2.* and jruby
 
 == Install
 
-  sudo gem install osc-ruby
+  gem install osc-ruby
 
 for the EMServer, you will need EventMachine
 
-  sudo gem install eventmachine
+  gem install eventmachine
 
 == Event Machine Basic example
 
@@ -46,6 +45,4 @@ Originally created by...
 
 Tadayoshi Funaba
 
-http://www.funaba.org/en/
-
-thx also to Toby Tripp, Brian McClain, Andreas Haller, James Hughes, Rapofran, and Daniel Dickison
+With help from: Toby Tripp, Brian McClain, Andreas Haller, James Hughes, Rapofran, Daniel Dickison, Sam Aaron, and {others}[https://github.com/aberant/osc-ruby/graphs/contributors].
