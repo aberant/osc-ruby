@@ -6,7 +6,7 @@ http://opensoundcontrol.org
 
 == Description
 
-This OSC gem originally created by Tadayoshi Funaba has been updated for modern ruby compatibility.  I've made a point to make this code as expressive as possible and provide a test suite for confident hacking.  It also should be flexible enough to support most crazy ideas.
+This OSC gem originally created by Tadayoshi Funaba has been updated for modern ruby compatibility.  I've made a point to make this code as expressive as possible and provide a test suite for confident hacking.  It also should be flexible enough to support most non-conventional ideas.
 
 
 == Install
