@@ -50,7 +50,7 @@ describe OSC::OSCString do
 end
 
 describe OSC::OSCBlob do
-    let(:val) {"bob the blob"}
+  let(:val) {"bob the blob"}
 
   it "should not blow up" do
     blob = OSC::OSCBlob.new(val)
@@ -58,5 +58,43 @@ describe OSC::OSCBlob do
 
     _(output.encoding).must_equal(Encoding.find("BINARY"))
     _(output).must_include(OSC::encode_blob(val))
+  end
+end
+
+describe "empty OSC types" do
+  describe OSC::OSCNil do
+    let (:nil_type) {OSC::OSCNil.new()}
+
+    it "has a tag of N" do
+      _(nil_type.tag).must_equal('N')
+    end
+
+    it "has an empty encode string" do
+      _(nil_type.encode).must_equal('')
+    end
+  end
+
+  describe OSC::OSCTrue do
+    let (:true_type) {OSC::OSCTrue.new()}
+
+    it "has a tag of T" do
+      _(true_type.tag).must_equal('T')
+    end
+
+    it "has an empty encode string" do
+      _(true_type.encode).must_equal('')
+    end
+  end
+
+  describe OSC::OSCFalse do
+    let (:true_type) {OSC::OSCFalse.new()}
+
+    it "has a tag of T" do
+      _(true_type.tag).must_equal('F')
+    end
+
+    it "has an empty encode string" do
+      _(true_type.encode).must_equal('')
+    end
   end
 end

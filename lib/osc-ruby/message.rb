@@ -23,6 +23,8 @@ module OSC
         when Float;       @args << OSCFloat32.new(arg)
         when String;      @args << OSCString.new(arg)
         when NilClass;    @args << OSCNil.new()
+        when TrueClass;   @args << OSCTrue.new()
+        when FalseClass;  @args << OSCFalse.new()
         when OSCType;     @args << arg
         end
       end

@@ -21,10 +21,14 @@ module OSC
     Utility::PaddedBinaryString.new([val.size].pack('N') + val)
   end
 
-  class OSCType
+  class OSCType; end
+  class OSCEmptyType < OSCType
+    def encode
+      ''
+    end
   end
 
-  class OSCNil < OSCType
+  class OSCNil < OSCEmptyType
     def tag
       'N'
     end
@@ -32,9 +36,25 @@ module OSC
     def val
       nil
     end
+  end
 
-    def encode
-      ''
+  class OSCTrue < OSCEmptyType
+    def tag
+      'T'
+    end
+
+    def val
+      true   
+    end
+  end
+  
+  class OSCFalse < OSCEmptyType
+    def tag
+      'F'
+    end
+
+    def val
+      false   
     end
   end
 

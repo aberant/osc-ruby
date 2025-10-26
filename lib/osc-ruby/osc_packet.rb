@@ -53,8 +53,10 @@ module OSC
        "d" => lambda{OSCDouble64.new(get_double64)},
        "s" => lambda{OSCString.new(get_string)},
        "b" => lambda{OSCBlob.new(get_blob)},
-       "N" => lambda{OSCNil.new()}
-     }
+       "N" => lambda{OSCNil.new()},
+       "T" => lambda{OSCTrue.new()},
+       "F" => lambda{OSCFalse.new()},
+      }
     end
 
     def get_bundle_messages
