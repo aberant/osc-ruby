@@ -1,4 +1,6 @@
 require 'eventmachine'
+require 'osc-ruby/address_pattern'
+require 'osc-ruby/osc_packet'
 
 module OSC
   Channel = EM::Channel.new

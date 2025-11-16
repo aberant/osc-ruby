@@ -1,5 +1,5 @@
-require File.join(File.dirname(__FILE__) , '..', 'spec_helper')
-
+require 'spec_helper'
+require 'osc-ruby/osc_packet'
 
 describe OSC::OSCPacket do
   before :each do
@@ -108,5 +108,13 @@ describe OSC::OSCPacket do
 
     args = msg.first.to_a
     _(args.first).must_be_close_to(pi, 0.001)
+  end
+
+  it "should decode messages with nil type" do
+    sent_msg = @builder.with_nil.build
+    msg = OSC::OSCPacket.messages_from_network(sent_msg.encode)
+    args = msg.first.to_a
+
+    _(args.first).must_be_nil
   end
 end

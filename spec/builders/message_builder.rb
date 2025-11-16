@@ -1,3 +1,5 @@
+require 'osc-ruby/message'
+
 class MessageBuilder
   def initialize
     @address = ""
@@ -32,7 +34,12 @@ class MessageBuilder
   end
 
   def with_blob(blob)
-    with_arg( "b", blob)
+    with_arg("b", blob)
+    self
+  end
+
+  def with_nil()
+    with_arg("N", nil)
     self
   end
 

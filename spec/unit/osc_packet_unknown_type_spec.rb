@@ -1,7 +1,8 @@
-require File.join(File.dirname(__FILE__) , '..', 'spec_helper')
+require 'spec_helper'
+require 'osc-ruby/osc_packet'
 
 describe OSC::OSCPacket do
-  it 'something' do
+  it 'raises when there is an unknown OSC type' do
     class OSC::BadType < OSC::OSCInt32; def tag() 'Z'; end end
     sent_msg = OSC::Message.new("/badtype", OSC::BadType.new(42))
 

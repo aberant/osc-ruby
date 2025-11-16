@@ -1,3 +1,5 @@
+require 'osc-ruby/osc_types'
+
 module OSC
   class Message
     attr_accessor :address
@@ -5,8 +7,8 @@ module OSC
     attr_accessor :ip_address
     attr_accessor :ip_port
 
-    def self.new_with_time(address, time, tags=nil, *args)
-      message = new(address, tags, *args)
+    def self.new_with_time(address, time, *args)
+      message = new(address, *args)
       message.time = time
       message
     end
@@ -20,7 +22,10 @@ module OSC
         when Integer;     @args << OSCInt32.new(arg)
         when Float;       @args << OSCFloat32.new(arg)
         when String;      @args << OSCString.new(arg)
-        when OSCArgument; @args << arg
+        when NilClass;    @args << OSCNil.new()
+        when TrueClass;   @args << OSCTrue.new()
+        when FalseClass;  @args << OSCFalse.new()
+        when OSCType;     @args << arg
         end
       end
     end

@@ -1,53 +1,118 @@
-require File.join(File.dirname(__FILE__), "osc_argument")
+require 'osc-ruby/utility/binary_string'
 
 module OSC
-  class OSCInt32 < OSCArgument
+  def self.encode_int(val)
+    Utility::BinaryString.new([val].pack('N'))
+  end
+
+  def self.encode_f32(val)
+    Utility::BinaryString.new([val].pack('g'))
+  end
+
+  def self.encode_f64(val)
+    Utility::BinaryString.new([val].pack('g'))
+  end
+
+  def self.encode_string(val)
+    Utility::PaddedBinaryString.new(val.sub(/\000.*\z/, '') + "\000")
+  end
+
+  def self.encode_blob(val)
+    Utility::PaddedBinaryString.new([val.size].pack('N') + val)
+  end
+
+  class OSCType; end
+  class OSCEmptyType < OSCType
+    def encode
+      ''
+    end
+  end
+
+  class OSCNil < OSCEmptyType
+    def tag
+      'N'
+    end
+
+    def val
+      nil
+    end
+  end
+
+  class OSCTrue < OSCEmptyType
+    def tag
+      'T'
+    end
+
+    def val
+      true   
+    end
+  end
+  
+  class OSCFalse < OSCEmptyType
+    def tag
+      'F'
+    end
+
+    def val
+      false   
+    end
+  end
+
+  class OSCValueType < OSCType
+    attr_accessor :val
+
+    def initialize(val)
+      @val = val
+    end
+  end
+
+  class OSCInt32 < OSCValueType
     def tag
       'i'
     end
 
     def encode
-      [@val].pack('N').force_encoding("BINARY")
+      OSC::encode_int(@val)
     end
   end
 
-  class OSCFloat32 < OSCArgument
+  class OSCFloat32 < OSCValueType
     def tag
       'f'
     end
 
     def encode
-      [@val].pack('g').force_encoding("BINARY")
+      OSC::encode_f32(@val)
     end
   end
 
-  class OSCDouble64 < OSCArgument
+  class OSCDouble64 < OSCValueType
     def tag
       'd'
     end
 
     def encode
-      [@val].pack('G').force_encoding("BINARY")
+      OSC::encode_f64(@val)
     end
   end
 
-  class OSCString < OSCArgument
+  class OSCString < OSCValueType
     def tag
       's'
     end
 
     def encode
-      padding(@val.sub(/\000.*\z/, '') + "\000").force_encoding("BINARY")
+      OSC::encode_string(@val)
     end
   end
 
-  class OSCBlob < OSCArgument
+  class OSCBlob < OSCValueType
     def tag
       'b'
     end
 
     def encode
-      padding([@val.size].pack('N') + @val).force_encoding("BINARY")
+      OSC::encode_blob(@val)
     end
   end
 end

@@ -1,5 +1,6 @@
-require File.join(File.dirname( __FILE__ ), 'network_packet')
-require 'ostruct'
+require 'osc-ruby/message'
+require 'osc-ruby/network_packet'
+require 'osc-ruby/osc_types'
 
 module OSC
   class UnknownType < StandardError; end
@@ -40,7 +41,7 @@ module OSC
       address = osc_packet.get_string
       args = osc_packet.get_arguments
 
-      Message.new_with_time(address, time, nil, *args)
+      Message.new_with_time(address, time, *args)
     end
 
     def initialize(string)
@@ -48,11 +49,14 @@ module OSC
 
       @types = {
        "i" => lambda{OSCInt32.new(get_int32)},
-       "f" => lambda{  OSCFloat32.new(get_float32)},
-       "d" => lambda{  OSCDouble64.new(get_double64)},
-       "s" => lambda{  OSCString.new(get_string)},
-       "b" => lambda{  OSCBlob.new(get_blob)}
-     }
+       "f" => lambda{OSCFloat32.new(get_float32)},
+       "d" => lambda{OSCDouble64.new(get_double64)},
+       "s" => lambda{OSCString.new(get_string)},
+       "b" => lambda{OSCBlob.new(get_blob)},
+       "N" => lambda{OSCNil.new()},
+       "T" => lambda{OSCTrue.new()},
+       "F" => lambda{OSCFalse.new()},
+      }
     end
 
     def get_bundle_messages
@@ -66,7 +70,7 @@ module OSC
     end
 
     def get_string
-      result = ''
+      result = String.new
       until ((c = @packet.getc) == string_delemeter)
         result << c
       end
@@ -90,7 +94,7 @@ module OSC
     end
 
     def get_arguments
-      if (@packet.getc == ?,)
+      if (@packet.getc == ',')
         tags = get_string
         args = []
 
